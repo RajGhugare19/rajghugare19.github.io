@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="NF4RL: [Paper Title]">
+  <meta name="keywords" content="[Keywords]">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BuilderBench</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.2/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.2/dist/js/bulma-slider.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">BuilderBench &ndash; A benchmark for generalist agents</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://rajghugare19.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Raj Ghugare</a>
+              <a href="https://scholar.google.com/citations?hl=en&user=eXh3y-sAAAAJ" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Catherine Ji</a>
+              <a href="https://kathrynwantlin.com/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Kathryn Wantlin</a>
+              <a href="https://jinschofield.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Jin Schofield</a>
+              <a href="https://ben-eysenbach.github.io" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Benjamin Eysenbach</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors" style="margin-top: -0.75rem">
+            <span class="author-block" style="font-size: 0.9em;">Princeton University</span>
+          </div>
+
+          <div class="column has-text-centered" style="margin-top: -1rem;">
+            <div class="is-size-6 publication-authors">
+              <span class="link-block">
+                
+                <a href="https://arxiv.org/abs/2510.06288" style="color: #598BE7; text-decoration: none; font-size: 1.5em;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://github.com/rajghugare19/builderbench" style="color: #598BE7; text-decoration: none; font-size: 1.5em;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">
+                  <span>Code</span>
+                </a>
+              </span>
+            
+            </div>
+          </div>
+
+          <!-- <img src="static/images/blocks.png" alt="open ended tasks" style="width: 65%; border-radius: 4px; margin-top: 1rem; margin-bottom: 1rem;"> -->
+          
+          <!-- BuilderBench Videos -->
+          <div class="video-gallery" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto;">
+              <div class="video-item">
+                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+                      <source src="static/images/7-temple.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Temple</p>
+              </div>
+              <div class="video-item">
+                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+                      <source src="static/images/8-twin-towers.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Twin Towers</p>
+              </div>
+              <div class="video-item">
+                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+                      <source src="static/images/9-igloo.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Igloo</p>
+              </div>
+              <div class="video-item">
+                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+                      <source src="static/images/12-wall.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Wall</p>
+              </div>
+          </div>
+
+          <p class="has-text-centered" style="font-family: 'Georgia', 'Times New Roman', serif; font-style: italic; font-size: 1.3em; color: #666; margin-top: 1rem; margin-bottom: 2rem;">
+            Can AI models build a world which today's generative models can only dream of?
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="margin-top: -4rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+              <p>
+                Today's AI models learn primarily through mimicry and sharpening, so it is not surprising that they struggle 
+                to solve problems beyond the limits set by existing data. To solve novel problems, agents should acquire 
+                skills for exploring and learning through experience.
+
+                BuilderBench is a benchmark designed to facilitate research towards developing such agents.
+                It attempts to capture challenges regarding open-ended exploration, embodied reasoning and wide generalization.
+              </p>
+              <p>
+                The main features of BuilderBench are:
+
+                <ul>
+                  <li>A <b>parallelizable</b> and <b>hardware-accelerated</b> simulator built using <a href="https://github.com/google-deepmind/mujoco">MuJoCo</a> and <a href="https://github.com/jax-ml/jax">Jax</a>. Training a PPO policy to pick and place a block takes less than 5 minutes on one GPU and twelve CPU threads.</li>
+                  <li>A task-suite of <b>42 (×4 variations) tasks</b>, where each task requires qualitatively different reasoning capabilities.</li>
+                  <li><b>Single file implementations</b> for two self-supervised RL and four RL algorithms in jax.
+                </ul>
+
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">Why building blocks?</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+              <p>
+                A central insight of our paper is that block building is a simple domain, that captures <b>open-endedness</b> and <b>embodied reasoning</b>.
+              
+                <ul>
+                  <li>Blocks conceptually form an atomic unit, allowing agents to build diverse structures. 
+                    The skills required to build various structures are <b>open-ended</b> as we scale the number of blocks.
+                  <li> While research on reasoning has almost become synonymous with large language models, lock-building allows us to study whether this sort of reasoning and
+                        generalization can emerge from the ground up, through exploration and trial-and-error learning.
+                </ul>
+
+              </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">Aha! moments: Reasoning in BuilderBench </h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <h6 style="margin-top: -1rem; margin-bottom: 2rem;">
+              <i>
+                (None of these tasks were solved by GPT-5 Thinking and Google Gemini Pro at the time of writing, see our <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://arxiv.org/pdf/2510.06288">paper</a> for more details.)
+              </i>
+              </h6>
+
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+              <p>
+                Task are carefully curated such that solving them requires the agent to unlock at least one distinct reasoning ability and compose various high-level skills sequentially.
+                Tasks not only require motor skills like locomotion, grasping and throwing but higher-
+                level skills such as logical reasoning (commutativity and associativity of pick and place ordering),
+                geometrical reasoning (maximizing overhangs, packing problems) and intuitive physics (gravity,
+                friction, toppling, balancing). Tasks also require reasoning about counterweights, buttresses, and
+                temporary scaffolding!
+              </p>
+
+              <p>
+                Let's look at some examples:
+              </p>
+              
+              <h4 style="margin-top: 2rem; margin-bottom: 2rem;">T-block</h4>
+              <img src="static/images/T-block.png" alt="T-block" style="width: 55%; border-radius: 4px; margin: 1rem auto 0.5rem auto; display: block;">
+              
+              <div style="margin-bottom: 1rem;">
+                <div style="text-align: center;">
+                  <button onclick="toggleDetails('tblock')" style="background: #598BE7; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 8px;">
+                    <span id="tblock-btn-text">Hide detailed solution</span>
+                  </button>
+                </div>
+                <div id="tblock-details" style="display: block; margin-top: 12px; padding: 16px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #598BE7;">
+                  <p>
+                    This task requires building a simple T shaped structure with one cube at the base, 
+                    and two cubes on top. 
+                    The second frame (B) shows what many people envision as the solution to this task. 
+                    However, as show in the frame, this configuration isn't stable. 
+                    Solving this task requires the reasoning insight to rotate the bottom cube by about 45<sup>&deg;</sup>. 
+                    Since the diagonal of the cube's top surface is longer than its edge length, the rotated base provides sufficient support for both top cubes, enabling a stable T-shaped structure (C).
+                  </p>
+                </div>
+              </div>
+              
+              <!-- <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;"> -->
+
+              <h4 style="margin-top: 4rem; margin-bottom: 2rem;">Leaning Tower</h4>
+              <img src="static/images/Leaning-tower.png" alt="Leaning tower" style="width: 95%; border-radius: 4px; margin: 1rem auto 1rem auto; display: block;">
+
+              <div style="margin-bottom: 1rem;">
+                <div style="text-align: center;">
+                  <button onclick="toggleDetails('leaning')" style="background: #598BE7; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 8px;">
+                    <span id="leaning-btn-text">See detailed solution</span>
+                  </button>
+                </div>
+                <div id="leaning-details" style="display: none; margin-top: 12px; padding: 16px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #598BE7;">
+                  <p>
+                    The target is a leaning tower composed of seven blocks and two extra cubes placed on the floor (see (A)). 
+                    Solving this task demands building two scaffolds and re-using the first one for the main tower. 
+                    It also requires an understanding of the concept of counterweights for generating a stable overhang. 
+                    The solution itself requires multiple steps of high level planning. 
+                    After building the base, the yellow block in the second layer must be supported by a temporary scaffold (see blue cube in (B)). 
+                    To stabilize the structure, the agent needs to add counterweights (the indigo and green cubes in (C)) and only then remove the scaffold (see (D)). 
+                    To build the third and fourth layer, the agent has to build another set of scaffolds and counterweights. 
+                    In particular, placing the pink block in the third layer requires a two-cube vertical scaffold (see (E)). 
+                    Finally, the tower is completed by adding the counterweights (the green and orange cubes in (F)) and removing and repositioning the last scaffold (see (G)).
+                  </p>
+                </div>
+              </div>
+              
+              <!-- <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;"> -->
+              
+              <h4 style="margin-top: 4rem; margin-bottom: 2rem;">Maximum overhang problem</h4>
+              <img src="static/images/max-overhang.png" alt="max-overhang" style="width: 40%; border-radius: 4px; margin: 1rem auto 1rem auto; display: block;">
+
+              <div style="margin-bottom: 1rem;">
+                <div style="text-align: center;">
+                  <button onclick="toggleDetails('overhang')" style="background: #598BE7; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 8px;">
+                    <span id="overhang-btn-text">See detailed solution</span>
+                  </button>
+                </div>
+                <div id="overhang-details" style="display: none; margin-top: 12px; padding: 16px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #598BE7;">
+                  <p>
+                    In this task, the environment contains five cubes, but the task only specifies the target positions for three cubes (see (A)). 
+                    But to put those three cubes in the target location, the agent will need to use all five blocks. 
+                    To correctly place the green and the yellow cubes (whose target positions are not specified) in order to complete the task, the agent needs to solve the popular maximum overhang problem. 
+                    The main intuition is that at any level, the collective center of the mass of all the cubes above, should not be on the right of the level's boundary. Without such a placement, the task is impossible to solve. 
+                    The pink cube is specified to "distract" the agent from simply holding the indigo cube in place.
+                  </p>
+                </div>
+              </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">BuilderBench Environment and Task-suite</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+                <p>
+                The <b>BuilderBench environment</b> consists of a single robot hand with five degrees of freedom.
+                The robot hand can navigate in 3D space and interact with n cubes. 
+                All interactions approximate newtonian physics simulated 
+                using MuJoCo. 
+                
+                Each task corresponds to a physically stable target structure built using a subset of cubes from the environment.
+                To specify a task, we provide the vector of target cube positions. 
+                </p>
+                
+                <p>
+                  The <b>BuilderBench task suite</b> contains a total of 42 tasks. Roughly, we have designed 5 tasks for each environment with 1-9 cubes.
+                  The primary design principles while curating tasks were: 
+
+                <ul>
+                  <li>Solving different tasks should require distinct high level skills.</li>
+                  <li>Most tasks should be solvable by humans.</li>
+                  <li>Tasks should range from very easy to extremely hard.</li>
+                  <li>Tasks should include some whose solutions are unknown even to the authors.</li>
+                </ul>
+
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">BuilderBench Training and evaluation</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+
+              <img src="static/images/train-eval-protocols.png" alt="train-eval-protocols" style="width: 100%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+
+              <p>
+              To evaluate open-ended exploration and generalization, we design the self-supervised protocol. 
+              We also provide a debug supervised protocol meant to provide additional feedback for researchers.              
+              </p>
+              
+              <p>
+              <b>
+              Self-supervised protocol: 
+              </b> The agent interacts with the environment, but does not receive
+                  any task specification during training. The agent's goal is to explore its environment to acquire
+                  general knowledge and skills that might help it to solve future tasks. The agent has to output a task-conditioned policy 
+                  which is evaluated on held-out tasks from the task-suite. 
+              </p>
+
+              <p>
+              <b>
+              Supervised protocol: 
+              </b> In this standard RL protocol, the agents interact with a single
+                    environment to solve a single task from the task-suite. It is trained and tested on the same goals.
+              </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">Benchmarking</h2>
+        
+        <!-- TL;DR Section -->
+        <div style="background-color: #f0f4ff; border-left: 4px solid #598BE7; padding: 20px; margin: 2rem 0; border-radius: 8px;">
+          <h3 style="color: #598BE7; font-size: 1.4em; font-weight: bold; margin-bottom: 12px;">TL;DR</h3>
+          <p style="font-size: 1.0em; line-height: 1.6; margin: 0; color: #333;">
+            We evaluate 6 algorithms across self-supervised (agents explore freely) and supervised (train on the test task). 
+            Current methods, both self-supervised and supervised, do not scale to complex tasks. We believe that research in developing new algorithms (or revisiting old ones) is required.
+          </p>
+        </div>
+        
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+
+              <img src="static/images/ssrl.png" alt="train-eval-protocols" style="width: 100%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+              
+              <p>
+              <b>
+              Self-supervised protocol: 
+              </b> 
+              We implemented two algorithms, sampling for learnability (<b>SFL</b>) and maximum entropy gain exploration (<b>MEGA</b>). 
+              Both algorithms are implemented using proximal policy optimization (<b>PPO</b>). 
+              </p>
+
+              <p>
+              Both algorithms achieve trivial performance on tasks with three cubes. 
+              While these results indicate that the tested algorithms are not directly scalable to complex tasks, it primarily underscores the inherent difficulty of the task setup itself. 
+              We believe that research in developing new algorithms (or revisiting old ones) is required to solve these tasks.
+              </p>
+
+
+              <img src="static/images/srl.png" alt="train-eval-protocols" style="width: 100%; border-radius: 4px; margin: 3rem auto 2rem auto; display: block;">
+              
+              <p>
+              <b>
+              Supervised protocol: 
+              </b> For this protocol, we benchmark four RL algorithms, proximal
+                  policy optimization (<b>PPO</b>), soft actor critic (<b>SAC</b>),
+                  contrastive RL (<b>CRL</b>), random network distillation (<b>RND</b>).
+              </p>
+
+              <p>
+                Training on the test goals improves both the returns and success
+                achieved by the best agents. However as the number of cubes and the complexity of the tasks increase, current
+                algorithms are not able to achieve a non zero success.
+              </p>  
+
+              <!-- <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;"> -->
+              
+              <h3 style="margin-top: 3rem" class="title is-4">Evaluating Large Language Models</h3>
+
+              <div style="width: 55%; margin: 2em auto; font-size: 0.9em;">
+                <table style="width: 100%; border-collapse: collapse; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
+                  <caption style="caption-side: top; font-weight: bold; font-size: 0.9em; margin-bottom: 8px; text-align: center;">
+                    <strong>Evaluating LLMs on BuilderBench. See our <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://arxiv.org/pdf/2510.06288">paper</a> for more details.</strong>
+                  </caption>
+                  <thead>
+                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #333;">Task Name</th>
+                      <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #333;">ChatGPT-5</th>
+                      <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #333;">Gemini 2.5 Pro</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                      <td style="padding: 10px 16px; color: #333;">T block</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                      <td style="padding: 10px 16px; color: #333;">Four cube packing</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                      <td style="padding: 10px 16px; color: #333;">Hexagonal Portal</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                      <td style="padding: 10px 16px; color: #333;">Leaning tower</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 10px 16px; color: #333;">Maximum Overhang</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+
+            It has been shown that scaling pretraining and inference-time compute can significantly enhance the reasoning abilities of language models
+            Each model was provided with a descriptive prompt about the environment and the task. 
+            The goal of the model was to provide a high-level open-loop plan in language, such that following this plan would stably build the target structure. 
+            A simple example task with a correct solution was also included in the prompt. 
+            The table above shows that both models, despite using inference-time compute, are not able to provide the correct high-level plan to solve any of the tasks.
+            While this is not meant to be an extensive evaluation of current models' abilities, it highlights how solving our tasks requires non-obvious steps of reasoning that are beyond what current models can achieve through scaling alone.
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+
+        <h2 style="margin-bottom: 3rem;" class="title is-3">Research opportunities and open questions</h2>
+
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+
+              <p>
+              <b>
+              What are the ingredients for building generalist agents that learn through self-supervised exploration?
+              </b>
+              Most tasks in the self-supervised protocol remain unsolvable by the algorithms we tried. This is by no means an exhaustive evaluation.
+              It will be exciting to see which approaches are key to making progress on these tasks.
+              </p>
+
+              <p>
+              <b>
+              Why do standard RL algorithms struggle to make progress on the more complex tasks?
+              </b>
+              All RL algorithms we tried achieve a zero success in tasks with more than 4 cubes. 
+              What are the primary reasons? Is it exploration, curse of horizon, model size, training steps, better hyperparameters or something else?
+              </p>
+
+              <p>
+              <b>
+              How to perform RL pretraining? 
+              </b> 
+              It is easy to come up with target structures that are stable and easy to build. 
+              By easy we mean the tasks that can be solved by simple pick and place primitives.
+              This is in contrast to tasks that require unique reasoning skills (see our task-suite for more examples), which are not trivial to design and to solve.
+              
+              We can train multi-task RL agents using dense rewards to solve these easy to build tasks. 
+              Will the pretrained model provide a better initialization for solving the novel / unsolvable tasks we really care about?
+              
+              This is akin to pretraining in LLMs where low quality data is cheap, but data for novel / unsolvable tasks in not availble (by definition).
+              </p>
+
+              
+              <p>
+              <b>
+              Two dimensional scaling.
+              </b> 
+              The self-supervised protocol allows one to study scaling in two new dimensions. 
+              Compute allocated to sampling autotelic tasks (exploration in tasks-space) and compute
+              allocated to solving the task via trial and error (exploration in trajectory-space). 
+              How to optimally balance the two?
+              </p>
+
+              <p>
+              <b>
+              What is the scaling behavior of current self-supervised exploration algorithms?
+              </b> 
+              While our results show that self-supervised exploration algorithms are not able to solve complex tasks, we have only made a preliminary evaluation.
+              BuilderBench allows one to study what is the scaling behavior of existing self-supervised algorithms. 
+              We argue that the key bottleneck for scaling self-supervised algorithms is availability of suitable benchmarks.
+              Existing benchmarks rarely allow agents to practice skills ranging from exploration to prediction, from low-level control to high-level reasoning.
+              </p>
+              
+              <p>
+              <b>
+              A new type of scaling law?
+              </b> 
+              Typically, the x-axis in scaling laws corresponds to compute. 
+              BuilderBench allows one to systematically put task hardness in the x-axis (build a pyramid from 1, 2, ..., blocks)
+              Can we reliably predict how RL algorithms scale with task hardness?
+              </p>
+
+              <p>
+              <b>
+              Why are off-policy RL algorithms (like SAC and CRL) are so much worse than PPO?
+              </b> 
+              In our experiments, we found that off-policy algorithms (<b>SAC</b> and <b>CRL</b>) were much worse in 
+              terms of sample efficiency and final performance than <b>PPO</b> and <b>RND</b>, despite making more gradient updates.
+              </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        Our easy-to-use <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://github.com/rajghugare19/builderbench">codebase</a> makes it easy to start exploring with these questions. Please reach out (<a href="mailto:rg9360@princeton.edu" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">rg9360@princeton.edu</a>) or open an github issue if you have any questions or comments.
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+  <h2 class="title">BibTeX</h2>
+  <pre><code>
+  @misc{ghugare2025builderbenchbenchmarkgeneralist,
+      title={BuilderBench -- A benchmark for generalist agents}, 
+      author={Raj Ghugare and Catherine Ji and Kathryn Wantlin and Jin Schofield and Benjamin Eysenbach},
+      year={2025},
+      eprint={2510.06288},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2510.06288}, 
+  }</code></pre>
+  </div>
+</section>
+
+<script>
+function toggleDetails(sectionId) {
+  const details = document.getElementById(sectionId + '-details');
+  const btnText = document.getElementById(sectionId + '-btn-text');
+  
+  if (details.style.display === 'none' || details.style.display === '') {
+    details.style.display = 'block';
+    btnText.textContent = 'Hide detailed solution';
+  } else {
+    details.style.display = 'none';
+    btnText.textContent = 'See detailed solution';
+  }
+}
+</script>
+
+</body>
+</html> 
