@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="NF4RL: [Paper Title]">
+  <meta name="description" content="BuilerBench">
   <meta name="keywords" content="[Keywords]">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BuilderBench</title>
@@ -16,6 +16,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+
+  <style>
+    /* Responsive rules for the video gallery */
+    .video-gallery { gap: 15px; }
+    @media (max-width: 900px) {
+      .video-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .video-gallery { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    }
+    /* LLM table container: keep centered and responsive */
+    .llm-table-container { width: 55%; margin: 2em auto; font-size: 0.9em; }
+    @media (max-width: 800px) {
+      .llm-table-container { width: 100%; max-width: 600px; margin: 1em auto; }
+    }
+  </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
@@ -62,33 +78,33 @@
             </div>
           </div>
 
-          <!-- <img src="static/images/blocks.png" alt="open ended tasks" style="width: 65%; border-radius: 4px; margin-top: 1rem; margin-bottom: 1rem;"> -->
+          <img src="static/images/blocks.png" alt="open ended tasks" style="width: 65%; border-radius: 4px; margin-top: 0rem; margin-bottom: 1.5rem;">
           
           <!-- BuilderBench Videos -->
-          <div class="video-gallery" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto;">
-              <div class="video-item">
-                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+          <div class="video-gallery" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; margin-top: 10px; width: 100%;">
+        <div class="video-item" style="min-width: 0;">
+          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
                       <source src="static/images/7-temple.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                   </video>
                   <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Temple</p>
               </div>
-              <div class="video-item">
-                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+        <div class="video-item" style="min-width: 0;">
+          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
                       <source src="static/images/8-twin-towers.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                   </video>
-                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Twin Towers</p>
+                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Double Towers</p>
               </div>
-              <div class="video-item">
-                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+        <div class="video-item" style="min-width: 0;">
+          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
                       <source src="static/images/9-igloo.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                   </video>
-                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Igloo</p>
+                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Tomb</p>
               </div>
-              <div class="video-item">
-                  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px;">
+        <div class="video-item" style="min-width: 0;">
+          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
                       <source src="static/images/12-wall.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                   </video>
@@ -154,7 +170,7 @@
                 <ul>
                   <li>Blocks conceptually form an atomic unit, allowing agents to build diverse structures. 
                     The skills required to build various structures are <b>open-ended</b> as we scale the number of blocks.
-                  <li> While research on reasoning has almost become synonymous with large language models, lock-building allows us to study whether this sort of reasoning and
+                  <li> While research on reasoning has almost become synonymous with large language models, block-building allows us to study whether this sort of reasoning and
                         generalization can emerge from the ground up, through exploration and trial-and-error learning.
                 </ul>
 
@@ -389,12 +405,10 @@
                 achieved by the best agents. However as the number of cubes and the complexity of the tasks increase, current
                 algorithms are not able to achieve a non zero success.
               </p>  
-
-              <!-- <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;"> -->
               
               <h3 style="margin-top: 3rem" class="title is-4">Evaluating Large Language Models</h3>
 
-              <div style="width: 55%; margin: 2em auto; font-size: 0.9em;">
+              <div class="llm-table-container">
                 <table style="width: 100%; border-collapse: collapse; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
                   <caption style="caption-side: top; font-weight: bold; font-size: 0.9em; margin-bottom: 8px; text-align: center;">
                     <strong>Evaluating LLMs on BuilderBench. See our <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://arxiv.org/pdf/2510.06288">paper</a> for more details.</strong>
