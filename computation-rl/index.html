@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="On Computation and RL">
+  <meta name="keywords" content="[Keywords]">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On Computation and RL</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.2/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <style>
+    /* Responsive rules for the video gallery */
+    .video-gallery { gap: 15px; }
+    @media (max-width: 900px) {
+      .video-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .video-gallery { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    }
+    /* LLM table container: keep centered and responsive */
+    .llm-table-container { width: 55%; margin: 2em auto; font-size: 0.9em; }
+    @media (max-width: 800px) {
+      .llm-table-container { width: 100%; max-width: 600px; margin: 1em auto; }
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.2/dist/js/bulma-slider.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">On Computation and Reinforcement Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://rajghugare19.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Raj Ghugare<sup>1</sup></a>
+              <a href="https://michalbortkiewicz.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Michał Bortkiewicz<sup>1,2,*</sup></a>
+              <a href="https://scholar.google.com/citations?user=nM8gabYAAAAJ&hl=en" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Alicja Ziarko<sup>1,3,*</sup></a>
+              <a href="https://ben-eysenbach.github.io" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Benjamin Eysenbach<sup>1</sup></a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors" style="margin-top: -0.75rem">
+            <span class="author-block" style="font-size: 0.7em;"><sup>1</sup>Princeton University</span>
+          <!-- </div> -->
+
+          <!-- <div class="is-size-5 publication-authors" style="margin-top: -0.75rem"> -->
+            <span class="author-block" style="font-size: 0.7em;"><sup>2</sup>Warsaw University of Technology</span>
+          <!-- </div> -->
+
+          <!-- <div class="is-size-5 publication-authors" style="margin-top: -0.75rem"> -->
+            <span class="author-block" style="font-size: 0.7em;"><sup>3</sup>University of Warsaw</span>
+          </div>
+
+          <div class="is-size-5 publication-authors" style="margin-top: -2rem">
+            <span class="author-block" style="font-size: 0.6em;"><sup>*</sup>Equal Contribution</span>
+          </div>
+
+          
+
+          <div class="column has-text-centered" style="margin-top: -1rem;">
+            <div class="is-size-6 publication-authors">
+              <span class="link-block">
+                
+                <a href="todo" style="color: #598BE7; text-decoration: none; font-size: 1.5em;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="todo" style="color: #598BE7; text-decoration: none; font-size: 1.5em;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">
+                  <span>Code</span>
+                </a>
+              </span>
+            
+            </div>
+          </div>
+          
+          <img src="static/images/voc-aspect.png" alt="value of compute" style="width: 65%; border-radius: 4px; margin-top: 0rem; margin-bottom: 1.5rem;">
+
+          <p class="has-text-centered" style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 1.0em; color: #666; margin-top: -1rem; margin-bottom: 2rem; max-width: 65%; margin-left: auto; margin-right: auto;">We measure the value that using additional compute provides in RL policies. Using additional compute for longer timesteps at the early half of the episode
+            provides the bulk of the value in this sokoban like task.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="margin-top: -4rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+              <p>
+                The standard view in reinforcement learning (RL) is to treat RL policies as static functions that map states to actions. 
+                Policies typically spend a fixed amount of compute, regardless of the complexity of making the correct decision in the underlying state. 
+                For example, for a humanoid robot, the action of where to move the right foot is easy, but figuring out how to efficiently pack furniture in a truck requires more deliberation. 
+
+                In RL, this limitation is often solved by citing Moore's law and simply scaling the number of policy parameters. 
+                But the compute required to make good decisions in different situations can span many orders of magnitude; using a static massive policy with a large number of parameters is wasteful. 
+                Additionally, as compute becomes cheap, the complexity of the world and sensory data also increase, making it infeasible to simply scale up policy parameters.
+
+              </p>
+              <p>
+                The main contributions of our work are:
+
+                <ul>
+                  <li>We advocate for a computational view of RL,
+                      where computation time and parameter count are distinct
+                      axes. We formulate RL policies as bounded models of computation and prove that policies with more compute time can achieve arbitrarily better performance and generalization to longer horizon tasks depending on the MDP.</li>
+                  <li>We empirically show that RL policies which use more compute achieve stronger performance
+                    as well as stronger generalization to longer-horizon unseen tasks</li>
+                </ul>
+              </p>
+              </div>
+            </div>
+          </div>
+          We highlight some of our experimental and theoretical results below. We conclude with a discussion of limitations and open questions.
+        </div>
+        
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">Experimental Setup</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+
+              <img src="static/images/rec-block.png" alt="rec-architecture" style="width: 30%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+
+              <p>
+              In our experiments, we will use the above architecture for policy and value networks. 
+              These networks will take as input the observation and (for Q-functions) the action. 
+              After an initial Linear layer and Layer-normalization layer, we apply a recurrent block layer N times.
+              After each application of the recurrent block, the previous cell state is added to the output using a skip connection.
+              The final cell state, after a Tanh activation, is passed through a final linear layer to predict the actions and values. 
+              The entire architecture is referred to as IRU-(N).
+              </p>    
+              
+              <p>
+              To evaluate the proposed architecture across a wide range of tasks — including discrete and continuous — 
+              we conduct experiments in the following domains: <a href="https://michalbortkiewicz.github.io/golden-standard/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">boxpick stitching benchmark</a>, 
+              <a href="https://en.wikipedia.org/wiki/Lights_Out_(game)" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">lightsout puzzle</a> and <a href="https://seohong.me/projects/ogbench/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">OGBench</a>.
+
+              The boxpick stitching tasks are difficult for RL algorithms, and many state of the art algorithms only achieve trivial performance on them.
+              In the lightsout tasks, the space of possible inputs is very large (2<sup>21</sup> for lightsout-4x5), hence it is challenging to memorize all the optimal actions.
+              </p>
+
+              <p>
+              On all discrete tasks we train on shorter horizon goals and evaluate on both shorter and longer horizon goals.
+              </p>  
+
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">The effect of recurrent steps on policy performance and long horizon generalization</h2>
+        <div class="content">
+          <div class="columns is-centered" style="margin-bottom: 2rem;">
+          <div class="column is-half has-text-centered">
+            <img src="static/images/boxpick-1.gif" alt="Boxpick Result 1" style="width: 80%;border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <p class="is-size-7 has-text-grey">Boxpick-exact-4</p>
+          </div>
+          <div class="column is-half has-text-centered">
+            <img src="static/images/boxpick-2.gif" alt="Boxpick Result 2" style="width: 80%;border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <p class="is-size-7 has-text-grey">Boxpick-gen-4-1</p>
+          </div>
+        </div>
+
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+              
+              <img src="static/images/boxpick-sample.png" alt="sample-efficiency-eval" style="width: 60%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+              <p>
+                In the above table, we compare IRU-(5), with the MLP and the ResNet architecture after 2.5 (50%) and 5 (50%) million environment steps. 
+                On all tasks, IRU-(5) outperforms the MLP, which uses less compute but similar number of parameters. 
+                Notably, IRU-(5) is able to solve the most challenging tasks like boxpick-exact-4, boxpick-gen-4-1 and lightsout-4x5, 
+                achieving a significant performance boost over the ResNet architecture. 
+                This is despite the ResNet using ~2 times more compute and ~5 times more parameters than IRU-(5). 
+                We hypothesize that this is due to the ResNet overfitting to seen tasks. This hypothesis is supported by the higher standard error values for the ResNet architecture in.
+
+              </p>
+              <img src="static/images/boxpick-eval.png" alt="eval" style="width: 100%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+
+              <img src="static/images/boxpick-gen.png" alt="long-horizon-eval" style="width: 100%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+
+              <p>
+                In most of the discrete and continuous tasks, we see that performance increases significantly with more recurrent steps. In the challenging boxpick tasks, or the manipulation tasks in ogbench, performance increases up to 8 times after increasing the recurrent steps from one to ten.
+              </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 class="title is-3">Theoretical results</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+              
+              <p>
+                Below we present an outline and intuition for our theoretical results. Please check our paper for formal statements, assumptions and proof.
+              </p>
+
+              <img src="static/images/r1.png" alt="policy-hierarchy" style="width: 70%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+              <p>
+                The above theorem tells us that there exist tasks on which policy classes that have more compute perform arbitrarily better than policies with less compute.
+                See our paper for the proof, which uses the time hierarchy theorems to construct the desired MDP. 
+                This result is interesting because it suggests that, under computational constraints, standard results about MDPs may no longer hold. 
+                For example, computation constraints may be reflected as partial observability, potentially explaining why prior experimental work has used non-Markov policies for solving ``fully observed'' tasks.
+                While recent work has argued that additional computation ("thinking" or "reasoning") is primarily useful because it enables policies to leverage multi-task pre-training, this theorem shows that the value of additional computation does not depend on multitask learning nor on pre-training.
+              </p>
+
+              <p>
+                Importantly, additional computation need not translate to larger hypotheses classes with weaker generalization. Rather, policies that use additional compute can provably exhibit stronger generalization. The intuition, which we formalize in the next theorem, is that a certain amount of compute capacity is required to represent the correct algorithm, and compute-constrained models will instead learn heuristics.
+              </p>
+
+              <img src="static/images/r2.png" alt="longer-horizon" style="width: 70%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+              <p>
+                The above theorem implies that a policy class with less compute can overfit on the training tasks of a more difficult problem and 
+                fail to generalize to longer-horizon tasks during evaluation. 
+                A simple example of this is language models being unable to solve GSM8K problems in a single forward pass (constant compute), 
+                but solving them when provided with more compute using chain of thought.
+              </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        <h2 style="margin-bottom: 3rem;" class="title is-3">Limitations and open questions</h2>
+
+        <div class="content">
+          <div class="columns">
+            <div class="column">
+              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
+
+              <p>
+                One limitation of our work is that we use a fixed amount of recurrent computation steps for all states. 
+                We do not demonstrate how the same policy can use an adaptive amount of compute depending on the difficulty of the current state. 
+                Future work could explore such methods which might automatically learn inference-time compute scaling strategies or pre-fetch anticipated computation to store in memory. 
+                Additionally, our empirical evaluation focuses on a minimal recurrent architecture to isolate the effects of computation. 
+                We do not explore transformer-based architectures, and given their ubiquity in machine learning, an exploration of transformer-based recursive architectures in RL remains an interesting direction for future research. 
+                Lastly, our theoretical results use a single tape Turing machine as a computational model and only focus on time-complexity. 
+                Similar interesting results could be proven for space complexity or by using computational models like boolean circuits which better resemble modern neural networks.
+              </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        Our easy-to-use <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="todo">codebase</a> makes it easy to start exploring these questions. Please reach out (<a href="mailto:rg9360@princeton.edu" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">rg9360@princeton.edu</a>) or open a github issue if you have any questions or comments.
+
+        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
+
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+  <h2 class="title">BibTeX</h2>
+  <pre><code>
+  <!-- @misc{ghugare2025builderbenchbenchmarkgeneralist,
+      title={BuilderBench -- A benchmark for generalist agents}, 
+      author={Raj Ghugare and Catherine Ji and Kathryn Wantlin and Jin Schofield and Benjamin Eysenbach},
+      year={2025},
+      eprint={2510.06288},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2510.06288}, 
+  }-->
+  </code></pre> 
+  </div>
+</section>
+
+<script>
+function toggleDetails(sectionId) {
+  const details = document.getElementById(sectionId + '-details');
+  const btnText = document.getElementById(sectionId + '-btn-text');
+  
+  if (details.style.display === 'none' || details.style.display === '') {
+    details.style.display = 'block';
+    btnText.textContent = 'Hide detailed solution';
+  } else {
+    details.style.display = 'none';
+    btnText.textContent = 'See detailed solution';
+  }
+}
+</script>
+
+</body>
+</html> 
