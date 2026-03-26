@@ -1,0 +1,601 @@
+a {
+    color: #598BE7;
+    text-decoration: none; 
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #296ae4;
+	text-decoration: underline;
+}
+
+.author-list {
+	font-size: 1rem;
+	font-weight: 500;
+	margin-top: 0px
+}
+.author-list a {
+	color: #598BE7;
+	text-decoration: none;
+	transition: color 0.2s ease-in-out;
+	font-size: 1.1rem;
+
+}
+.author-list a:hover {
+	color: #296ae4;
+	text-decoration: underline;
+}
+
+:root {
+	color-scheme: light dark;
+}
+
+body {
+	font-family: 'Google Sans', sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+	background: #ffffff;
+	color: #111111;
+}
+
+main {
+	max-width: 680px;
+	margin: 0 auto;
+	padding: 48px 24px 80px;
+}
+
+header {
+	margin-top: -60px;
+	text-align: center;
+}
+
+.hero-plot {
+	width: 120%;
+	max-width: 120%;
+	margin-top: 40px;
+	height: auto;
+	display: block;
+	margin-left: -10%;
+	object-fit: contain;
+}
+
+.hero-figure {
+	margin: 0 0 24px;
+	text-align: center;
+}
+
+.hero-caption {
+	padding-top: 40px;
+	font-size: 0.95rem;
+	color: #666666;
+}
+
+.case-figure {
+	margin: 20px 0 16px;
+	text-align: center;
+}
+
+.case-card {
+	position: relative;
+	padding: 18px 16px 16px;
+	max-width: 240px;
+	margin: 20px auto 16px;
+	border-radius: 16px;
+	border: 1px solid #e6e6e6;
+	background: linear-gradient(180deg, #ffffff 0%, #f8f6f0 100%);
+	box-shadow: 0 10px 22px rgba(17, 17, 17, 0.08);
+}
+
+.case-image {
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	object-fit: contain;
+}
+
+.case-caption {
+	margin-top: 10px;
+	font-size: 0.95rem;
+	color: #666666;
+}
+
+.case-caption b {
+	font-size: 0.83rem;
+}
+
+
+.case-card-float {
+	float: right;
+	margin: 0 0 12px 16px;
+	transform: translateY(10px);
+}
+
+.case-clear {
+	clear: both;
+}
+
+.title-line {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	gap: 12px;
+}
+
+h1 {
+	font-family: 'Google Sans', sans-serif;
+	font-weight: 500;
+	font-size: 2.4rem;
+	margin: 32px 0 14px;
+}
+
+.subtitle {
+	font-size: 0.95rem;
+	color: #444444;
+	margin: 0;
+}
+
+.meta {
+	font-size: 0.95rem;
+	color: #666666;
+}
+
+.closing-note {
+	font-size: 1rem;
+	color: #6b6b6b;
+}
+
+section {
+	margin: 32px 0;
+}
+
+h2 {
+	font-family: 'Google Sans', sans-serif;
+	font-weight: 500;
+	font-size: 1.5rem;
+	margin-bottom: 12px;
+}
+
+h3 {
+	font-family: 'Google Sans', sans-serif;
+	font-weight: 500;
+}
+
+ul {
+	padding-left: 20px;
+}
+
+blockquote {
+	border-left: 4px solid #dddddd;
+	margin: 16px 0;
+	padding: 8px 16px;
+	background: #f7f7f7;
+}
+
+.agent-summary {
+    border-left: none;
+    border: 1px solid #b7d6ff;
+    border-radius: 12px;
+    background: #f5f9ff;
+    padding: 12px 16px;
+    padding-bottom: 0px;
+}
+
+.agent-summary p {
+	margin-top: 0;
+}
+
+.agent-summary h2 {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.agent-summary,
+.agent-summary p,
+.agent-summary li {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85rem;
+}
+
+/* Adjust the heading inside the summary to match the new monospace theme */
+.agent-summary h2 {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.95rem; /* Slightly larger than the body text for hierarchy */
+    font-weight: bold;
+}
+
+.agent-summary summary {
+    cursor: pointer;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #296ae4; /* Uses your existing link blue to hint at interactivity */
+    padding-bottom: 12px;
+}
+
+/* Adjust the hover state for the trigger */
+.agent-summary summary:hover {
+    color: #598BE7;
+}
+
+/* Add a separator line and spacing for the expanded content */
+.agent-summary .summary-content {
+    border-top: 1px solid #b7d6ff;
+    padding-top: 12px;
+    padding-bottom: 0px;
+}
+
+footer {
+	margin-top: 48px;
+	font-size: 0.9rem;
+	color: #666666;
+}
+
+#references footer {
+	margin-top: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background: #0f1115;
+		color: #e5e7eb;
+	}
+	.subtitle,
+	.meta,
+	footer {
+		color: #9ca3af;
+	}
+	.closing-note {
+		color: #9ca3af;
+	}
+	.hero-caption {
+		color: #9ca3af;
+	}
+	blockquote {
+		border-left-color: #374151;
+		background: #111827;
+		color: #d1d5db;
+	}
+	.task-slideshow-hint {
+		color: #9ca3af;
+	}
+	.case-card {
+		border-color: #2a2f3a;
+		background: linear-gradient(180deg, #0f1115 0%, #131824 100%);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+	}
+	.case-caption {
+		color: #9ca3af;
+	}
+	.prompt-box {
+		border-color: #1f3a5f;
+		background: #0f1a2b;
+	}
+	.prompt-caption {
+		color: #9ca3af;
+	}
+	.appendix-separator {
+		border-top-color: #2a3446;
+	}
+
+    .prompt-box {
+        background: #0f1a2b !important; 
+        border-color: #1f3a5f !important; 
+    }
+
+    .prompt-box,
+    .agent-summary {
+		background: #0f1a2b !important; 
+        border-color: #1a3357 !important; 
+    }
+
+    .prompt-box,
+    .prompt-box pre,
+    .prompt-box code,
+    .agent-summary,
+    .agent-summary h2,
+    .agent-summary p,
+    .agent-summary li {
+        color: #e5e7eb !important; 
+    }
+
+    .slide-nav {
+        background: #374151; 
+        color: #ffffff;
+    }
+
+    .slide-nav:hover {
+        background: #4b5563; 
+    }
+
+    .video-gallery .caption,
+    .reflexion-item figcaption,
+    .reflexion-caption {
+        color: #9ca3af; 
+    }
+
+    a:hover,
+    .author-list a:hover {
+        color: #8bb4fa; 
+    }
+}
+
+@media (max-width: 720px) {
+	.case-card-float {
+		float: none;
+		margin: 16px auto;
+	}
+	.hero-figure {
+		overflow-x: hidden;
+	}
+	.hero-plot {
+		transform: scale(1);
+	}
+}
+
+
+.video-gallery {
+    display: flex;
+    flex-wrap: wrap; /* Allows stacking on mobile screens */
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.video-gallery video {
+    width: 100%;
+	max-width: 48%; /* Keeps them side-by-side on desktop */
+    border-radius: 8px; /* Optional: gives a nice modern edge */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: adds subtle depth */
+}
+
+.video-gallery .caption {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0px;
+}
+
+.reflexion-row {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+	margin: 30px 0 12px;
+	width: calc(100% + 80px);
+	margin-left: -40px;
+	margin-right: -40px;
+}
+
+
+.reflexion-item {
+	flex: 1 1 0;
+	width: 100%;
+	max-width: 45%;
+	margin: 0;
+	text-align: center;
+}
+
+.reflexion-item video {
+	width: 100%;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reflexion-item figcaption {
+	margin-top: 6px;
+	font-size: 0.85em;
+	color: #666;
+}
+
+.reflexion-caption {
+	text-align: center;
+	font-size: 0.98em;
+	color: #666;
+	margin-top: 10px;
+}
+
+.task-slideshow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 40px 0 8px;
+}
+
+.task-slides {
+	display: flex;
+	gap: 16px;
+	overflow-x: auto;
+	padding: 8px 4px;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+}
+
+.task-slide {
+	flex: 0 0 220px;
+	margin: 0;
+	scroll-snap-align: center;
+	background: #f7f7f7;
+	border-radius: 12px;
+	padding: 10px;
+	/* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); */
+}
+
+.task-slide img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 8px;
+}
+
+.slide-nav {
+	border: none;
+	background: #111111;
+	color: #ffffff;
+	width: 40px;
+	height: 40px;
+	border-radius: 999px;
+	font-size: 1.4rem;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.slide-nav:focus-visible {
+	outline: 2px solid #2563eb;
+	outline-offset: 3px;
+}
+
+.task-slideshow-hint {
+	text-align: center;
+	font-size: 0.9rem;
+	color: #666666;
+	margin: 4px 0 0;
+}
+
+.prompt-figure {
+	margin: 25px 0 0;
+}
+
+.prompt-box {
+	border: 1px solid #b7d6ff;
+	background: #f5f9ff;
+	border-radius: 12px;
+	padding: 12px 10px;
+}
+
+.prompt-box pre {
+	margin: 0;
+	white-space: pre-wrap;
+	word-break: break-word;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	font-size: 0.85rem;
+}
+
+.prompt-caption {
+	text-align: center;
+	font-size: 0.9rem;
+	color: #666666;
+	margin-top: 8px;
+}
+
+.appendix-separator {
+	border: 0;
+	border-top: 1px solid #e3e7ef;
+	margin: 20px 0 8px;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 720px) {
+	.video-gallery video {
+		max-width: 100%;
+	}
+	.reflexion-item {
+		max-width: 100%;
+	}
+	.reflexion-row {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.task-slideshow {
+		gap: 8px;
+	}
+	.task-slide {
+		flex-basis: 180px;
+	}
+}
+
+.document-outline {
+    position: fixed;
+    top: 120px;
+    /* Positions the outline nicely to the left of the 680px centered main container */
+    left: calc(50vw - 340px - 320px); 
+    width: 200px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.outline-title {
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #444444;
+    margin-bottom: 12px;
+    padding-left: 12px;
+}
+
+.outline-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid transparent; /* Prevents shifting on hover */
+}
+
+.outline-list li {
+    margin-bottom: 4px;
+}
+
+.outline-list a {
+    display: block;
+    font-size: 0.85rem;
+    color: #666666;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 0 8px 8px 0;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.outline-list a:hover {
+    color: #111111;
+    background-color: #f0f4f9; /* Soft Google Docs hover gray/blue */
+    border-left-color: #296ae4;
+}
+
+.outline-list a.active {
+    color: #111111;
+    background-color: #e8f0fe; /* Soft blue highlight */
+    border-left-color: #296ae4;
+    font-weight: 500;
+}
+
+/* Hide the outline on screens where it would overlap the main content */
+@media (max-width: 1200px) {
+    .document-outline {
+        display: none;
+    }
+}
+
+/* Dark Mode Adjustments for the Outline */
+@media (prefers-color-scheme: dark) {
+    .outline-title {
+        color: #e5e7eb;
+    }
+    .outline-list a {
+        color: #9ca3af;
+    }
+    .outline-list a:hover {
+        color: #ffffff;
+        background-color: #1f2937;
+        border-left-color: #8bb4fa;
+    }
+}
+
+/* Make sure the active state looks good in dark mode too */
+@media (prefers-color-scheme: dark) {
+    .outline-list a.active {
+        color: #ffffff;
+        background-color: #1a2333;
+        border-left-color: #8bb4fa;
+    }
+}

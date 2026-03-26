@@ -1,591 +1,786 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="BuilerBench">
-  <meta name="keywords" content="[Keywords]">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BuilderBench</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.2/dist/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-
-  <style>
-    /* Responsive rules for the video gallery */
-    .video-gallery { gap: 15px; }
-    @media (max-width: 900px) {
-      .video-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 480px) {
-      .video-gallery { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-    }
-    /* LLM table container: keep centered and responsive */
-    .llm-table-container { width: 55%; margin: 2em auto; font-size: 0.9em; }
-    @media (max-width: 800px) {
-      .llm-table-container { width: 100%; max-width: 600px; margin: 1em auto; }
-    }
-  </style>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.2/dist/js/bulma-slider.min.js"></script>
-</head>
-<body>
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">BuilderBench &ndash; A benchmark for generalist agents</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://rajghugare19.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Raj Ghugare</a>
-              <a href="https://scholar.google.com/citations?hl=en&user=eXh3y-sAAAAJ" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Catherine Ji</a>
-              <a href="https://kathrynwantlin.com/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Kathryn Wantlin</a>
-              <a href="https://jinschofield.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Jin Schofield</a>
-              <a href="https://ben-eysenbach.github.io" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Benjamin Eysenbach</a>
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors" style="margin-top: -0.75rem">
-            <span class="author-block" style="font-size: 0.9em;">Princeton University</span>
-          </div>
-
-          <div class="column has-text-centered" style="margin-top: -1rem;">
-            <div class="is-size-6 publication-authors">
-              <span class="link-block">
-                
-                <a href="https://arxiv.org/abs/2510.06288" style="color: #598BE7; text-decoration: none; font-size: 1.5em;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">
-                  <span>Paper</span>
-                </a>
-              </span>
-
-              <span class="link-block">
-                <a href="https://github.com/rajghugare19/builderbench" style="color: #598BE7; text-decoration: none; font-size: 1.5em;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">
-                  <span>Code</span>
-                </a>
-              </span>
-            
-            </div>
-          </div>
-
-          <img src="static/images/blocks.png" alt="open ended tasks" style="width: 65%; border-radius: 4px; margin-top: 0rem; margin-bottom: 1.5rem;">
-          
-          <!-- BuilderBench Videos -->
-          <div class="video-gallery" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; margin-top: 10px; width: 100%;">
-        <div class="video-item" style="min-width: 0;">
-          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
-                      <source src="static/images/7-temple.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Temple</p>
-              </div>
-        <div class="video-item" style="min-width: 0;">
-          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
-                      <source src="static/images/8-twin-towers.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Double Towers</p>
-              </div>
-        <div class="video-item" style="min-width: 0;">
-          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
-                      <source src="static/images/9-igloo.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Tomb</p>
-              </div>
-        <div class="video-item" style="min-width: 0;">
-          <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius: 5px; display: block;">
-                      <source src="static/images/12-wall.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                  <p style="text-align: center; font-size: 12px; color: #696969; margin-top: 5px;">Wall</p>
-              </div>
-          </div>
-
-          <p class="has-text-centered" style="font-family: 'Georgia', 'Times New Roman', serif; font-style: italic; font-size: 1.3em; color: #666; margin-top: 1rem; margin-bottom: 2rem;">
-            Can AI models build a world which today's generative models can only dream of?
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" style="margin-top: -4rem;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Motivation</h2>
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-              <p>
-                Today's AI models learn primarily through mimicry and sharpening, so it is not surprising that they struggle 
-                to solve problems beyond the limits set by existing data. To solve novel problems, agents should acquire 
-                skills for exploring and learning through experience.
-
-                BuilderBench is a benchmark designed to facilitate research towards developing such agents.
-                It attempts to capture challenges regarding open-ended exploration, embodied reasoning and wide generalization.
-              </p>
-              <p>
-                The main features of BuilderBench are:
-
-                <ul>
-                  <li>A <b>parallelizable</b> and <b>hardware-accelerated</b> simulator built using <a href="https://github.com/google-deepmind/mujoco">MuJoCo</a> and <a href="https://github.com/jax-ml/jax">Jax</a>. Training a PPO policy to pick and place a block takes less than 5 minutes on one GPU and twelve CPU threads.</li>
-                  <li>A task-suite of <b>42 (×4 variations) tasks</b>, where each task requires qualitatively different reasoning capabilities.</li>
-                  <li><b>Single file implementations</b> for two self-supervised RL and four RL algorithms in jax.
-                </ul>
-
-              </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-        <h2 class="title is-3">Why building blocks?</h2>
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-              <p>
-                A central insight of our paper is that block building is a simple domain, that captures <b>open-endedness</b> and <b>embodied reasoning</b>.
-              
-                <ul>
-                  <li>Blocks conceptually form an atomic unit, allowing agents to build diverse structures. 
-                    The skills required to build various structures are <b>open-ended</b> as we scale the number of blocks.
-                  <li> While research on reasoning has almost become synonymous with large language models, block-building allows us to study whether this sort of reasoning and
-                        generalization can emerge from the ground up, through exploration and trial-and-error learning.
-                </ul>
-
-              </p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-        <h2 class="title is-3">Aha! moments: Reasoning in BuilderBench </h2>
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              <h6 style="margin-top: -1rem; margin-bottom: 2rem;">
-              <i>
-                (None of these tasks were solved by GPT-5 Thinking and Google Gemini Pro at the time of writing, see our <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://arxiv.org/pdf/2510.06288">paper</a> for more details.)
-              </i>
-              </h6>
-
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-              <p>
-                Task are carefully curated such that solving them requires the agent to unlock at least one distinct reasoning ability and compose various high-level skills sequentially.
-                Tasks not only require motor skills like locomotion, grasping and throwing but higher-level skills such as logical reasoning (commutativity and associativity of pick and place ordering),
-                geometrical reasoning (maximizing overhangs, packing problems) and intuitive physics (gravity,
-                friction, toppling, balancing). Tasks also require reasoning about counterweights, buttresses, and
-                temporary scaffolding!
-              </p>
-
-              <p>
-                Let's look at some examples:
-              </p>
-              
-              <h4 style="margin-top: 2rem; margin-bottom: 2rem;">T-block</h4>
-              <img src="static/images/T-block.png" alt="T-block" style="width: 55%; border-radius: 4px; margin: 1rem auto 0.5rem auto; display: block;">
-              
-              <div style="margin-bottom: 1rem;">
-                <div style="text-align: center;">
-                  <button onclick="toggleDetails('tblock')" style="background: #598BE7; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 8px;">
-                    <span id="tblock-btn-text">Hide detailed solution</span>
-                  </button>
-                </div>
-                <div id="tblock-details" style="display: block; margin-top: 12px; padding: 16px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #598BE7;">
-                  <p>
-                    This task requires building a simple T shaped structure with one cube at the base, 
-                    and two cubes on top. 
-                    The second frame (B) shows what many people envision as the solution to this task. 
-                    However, as show in the frame, this configuration isn't stable. 
-                    Solving this task requires the reasoning insight to rotate the bottom cube by about 45<sup>&deg;</sup>. 
-                    Since the diagonal of the cube's top surface is longer than its edge length, the rotated base provides sufficient support for both top cubes, enabling a stable T-shaped structure (C).
-                  </p>
-                </div>
-              </div>
-              
-              <!-- <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;"> -->
-
-              <h4 style="margin-top: 4rem; margin-bottom: 2rem;">Leaning Tower</h4>
-              <img src="static/images/Leaning-tower.png" alt="Leaning tower" style="width: 95%; border-radius: 4px; margin: 1rem auto 1rem auto; display: block;">
-
-              <div style="margin-bottom: 1rem;">
-                <div style="text-align: center;">
-                  <button onclick="toggleDetails('leaning')" style="background: #598BE7; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 8px;">
-                    <span id="leaning-btn-text">See detailed solution</span>
-                  </button>
-                </div>
-                <div id="leaning-details" style="display: none; margin-top: 12px; padding: 16px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #598BE7;">
-                  <p>
-                    The target is a leaning tower composed of seven blocks and two extra cubes placed on the floor (see (A)). 
-                    Solving this task demands building two scaffolds and re-using the first one for the main tower. 
-                    It also requires an understanding of the concept of counterweights for generating a stable overhang. 
-                    The solution itself requires multiple steps of high level planning. 
-                    After building the base, the yellow block in the second layer must be supported by a temporary scaffold (see blue cube in (B)). 
-                    To stabilize the structure, the agent needs to add counterweights (the indigo and green cubes in (C)) and only then remove the scaffold (see (D)). 
-                    To build the third and fourth layer, the agent has to build another set of scaffolds and counterweights. 
-                    In particular, placing the pink block in the third layer requires a two-cube vertical scaffold (see (E)). 
-                    Finally, the tower is completed by adding the counterweights (the green and orange cubes in (F)) and removing and repositioning the last scaffold (see (G)).
-                  </p>
-                </div>
-              </div>
-              
-              <!-- <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;"> -->
-              
-              <h4 style="margin-top: 4rem; margin-bottom: 2rem;">Maximum overhang problem</h4>
-              <img src="static/images/max-overhang.png" alt="max-overhang" style="width: 40%; border-radius: 4px; margin: 1rem auto 1rem auto; display: block;">
-
-              <div style="margin-bottom: 1rem;">
-                <div style="text-align: center;">
-                  <button onclick="toggleDetails('overhang')" style="background: #598BE7; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; margin-top: 8px;">
-                    <span id="overhang-btn-text">See detailed solution</span>
-                  </button>
-                </div>
-                <div id="overhang-details" style="display: none; margin-top: 12px; padding: 16px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #598BE7;">
-                  <p>
-                    In this task, the environment contains five cubes, but the task only specifies the target positions for three cubes (see (A)). 
-                    But to put those three cubes in the target location, the agent will need to use all five blocks. 
-                    To correctly place the green and the yellow cubes (whose target positions are not specified) in order to complete the task, the agent needs to solve the popular maximum overhang problem. 
-                    The main intuition is that at any level, the collective center of the mass of all the cubes above, should not be on the right of the level's boundary. Without such a placement, the task is impossible to solve. 
-                    The pink cube is specified to "distract" the agent from simply holding the indigo cube in place.
-                  </p>
-                </div>
-              </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-        <h2 class="title is-3">BuilderBench Environment and Task-suite</h2>
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-                <p>
-                The <b>BuilderBench environment</b> consists of a single robot hand with five degrees of freedom.
-                The robot hand can navigate in 3D space and interact with n cubes. 
-                All interactions approximate newtonian physics simulated 
-                using MuJoCo. 
-                
-                Each task corresponds to a physically stable target structure built using a subset of cubes from the environment.
-                To specify a task, we provide the vector of target cube positions. 
-                </p>
-                
-                <p>
-                  The <b>BuilderBench task suite</b> contains a total of 42 tasks. Roughly, we have designed 5 tasks for each environment with 1-9 cubes.
-                  The primary design principles while curating tasks were: 
-
-                <ul>
-                  <li>Solving different tasks should require distinct high level skills.</li>
-                  <li>Most tasks should be solvable by humans.</li>
-                  <li>Tasks should range from very easy to extremely hard.</li>
-                  <li>Tasks should include some whose solutions are unknown even to the authors.</li>
-                </ul>
-
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-        <h2 class="title is-3">BuilderBench Training and evaluation</h2>
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-
-              <img src="static/images/train-eval-protocols.png" alt="train-eval-protocols" style="width: 100%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
-
-              <p>
-              To evaluate open-ended exploration and generalization, we design the self-supervised protocol. 
-              We also provide a debug supervised protocol meant to provide additional feedback for researchers.              
-              </p>
-              
-              <p>
-              <b>
-              Self-supervised protocol: 
-              </b> The agent interacts with the environment, but does not receive
-                  any task specification during training. The agent's goal is to explore its environment to acquire
-                  general knowledge and skills that might help it to solve future tasks. The agent has to output a task-conditioned policy 
-                  which is evaluated on held-out tasks from the task-suite. 
-              </p>
-
-              <p>
-              <b>
-              Supervised protocol: 
-              </b> In this standard RL protocol, the agents interact with a single
-                    environment to solve a single task from the task-suite. It is trained and tested on the same goals.
-              </p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-        <h2 class="title is-3">Benchmarking</h2>
-        
-        <!-- TL;DR Section -->
-        <div style="background-color: #f0f4ff; border-left: 4px solid #598BE7; padding: 20px; margin: 2rem 0; border-radius: 8px;">
-          <h3 style="color: #598BE7; font-size: 1.4em; font-weight: bold; margin-bottom: 12px;">TL;DR</h3>
-          <p style="font-size: 1.0em; line-height: 1.6; margin: 0; color: #333;">
-            We evaluate 6 algorithms across self-supervised (agents explore freely) and supervised (train on the test task). 
-            Current methods, both self-supervised and supervised, do not scale to complex tasks. We believe that research in developing new algorithms (or revisiting old ones) is required.
-          </p>
-        </div>
-        
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-
-              <img src="static/images/ssrl.png" alt="train-eval-protocols" style="width: 100%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
-              
-              <p>
-              <b>
-              Self-supervised protocol: 
-              </b> 
-              We implemented two algorithms, sampling for learnability (<b>SFL</b>) and maximum entropy gain exploration (<b>MEGA</b>). 
-              Both algorithms are implemented using proximal policy optimization (<b>PPO</b>). 
-              </p>
-
-              <p>
-              Both algorithms achieve trivial performance on tasks with three cubes. 
-              While these results indicate that the tested algorithms are not directly scalable to complex tasks, it primarily underscores the inherent difficulty of the task setup itself. 
-              We believe that research in developing new algorithms (or revisiting old ones) is required to solve these tasks.
-              </p>
-
-
-              <img src="static/images/srl.png" alt="train-eval-protocols" style="width: 100%; border-radius: 4px; margin: 3rem auto 2rem auto; display: block;">
-              
-              <p>
-              <b>
-              Supervised protocol: 
-              </b> For this protocol, we benchmark four RL algorithms, proximal
-                  policy optimization (<b>PPO</b>), soft actor critic (<b>SAC</b>),
-                  contrastive RL (<b>CRL</b>), random network distillation (<b>RND</b>).
-              </p>
-
-              <p>
-                Training on the test goals improves both the returns and success
-                achieved by the best agents. However as the number of cubes and the complexity of the tasks increase, current
-                algorithms are not able to achieve a non zero success.
-              </p>  
-              
-              <h3 style="margin-top: 3rem" class="title is-4">Evaluating Large Language Models</h3>
-
-              <div class="llm-table-container">
-                <table style="width: 100%; border-collapse: collapse; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
-                  <caption style="caption-side: top; font-weight: bold; font-size: 0.9em; margin-bottom: 8px; text-align: center;">
-                    <strong>Evaluating LLMs on BuilderBench. See our <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://arxiv.org/pdf/2510.06288">paper</a> for more details.</strong>
-                  </caption>
-                  <thead>
-                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
-                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #333;">Task Name</th>
-                      <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #333;">ChatGPT-5</th>
-                      <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #333;">Gemini 2.5 Pro</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style="border-bottom: 1px solid #dee2e6;">
-                      <td style="padding: 10px 16px; color: #333;">T block</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #dee2e6;">
-                      <td style="padding: 10px 16px; color: #333;">Four cube packing</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #dee2e6;">
-                      <td style="padding: 10px 16px; color: #333;">Hexagonal Portal</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #dee2e6;">
-                      <td style="padding: 10px 16px; color: #333;">Leaning tower</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                    </tr>
-                    <tr>
-                      <td style="padding: 10px 16px; color: #333;">Maximum Overhang</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                      <td style="padding: 10px 16px; text-align: center; color: #dc3545; font-size: 1.2em;">✗</td>
-                    </tr>
-                  </tbody>
-                </table>
-            </div>
-
-            It has been shown that scaling pretraining and inference-time compute can significantly enhance the reasoning abilities of language models.
-            To test whether the latest proprietary models can solve tasks from our task-suite, we evaluated ChatGPT-53 and Gemini 2.5 Pro in some of our tasks. 
-            Each model was provided with a descriptive prompt about the environment and the task. 
-            The goal of the model was to provide a high-level open-loop plan in language, such that following this plan would stably build the target structure. 
-            A simple example task with a correct solution was also included in the prompt. 
-            The table above shows that both models, despite using inference-time compute, are not able to provide the correct high-level plan to solve any of the tasks.
-            While this is not meant to be an extensive evaluation of current models' abilities, it highlights how solving our tasks requires non-obvious steps of reasoning that are beyond what current models can achieve through scaling alone.
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-
-        <h2 style="margin-bottom: 3rem;" class="title is-3">Research opportunities and open questions</h2>
-
-        <div class="content">
-          <div class="columns">
-            <div class="column">
-              <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
-
-              <p>
-              <b>
-              What are the ingredients for building generalist agents that learn through self-supervised exploration?
-              </b>
-              Most tasks in the self-supervised protocol remain unsolvable by the algorithms we tried. This is by no means an exhaustive evaluation.
-              It will be exciting to see which approaches lead to agents that can solve the most complex tasks purely through self-supervised trial and error.
-              </p>
-
-              <p>
-              <b>
-              Why do standard RL algorithms struggle to make progress on the more complex tasks?
-              </b>
-              All RL algorithms we tried achieve a zero success in tasks with more than 4 cubes. 
-              What are the primary reasons? Is it exploration, curse of horizon, model size, training steps, better hyperparameters or something else?
-              </p>
-
-              <p>
-              <b>
-              How to perform RL pretraining? 
-              </b> 
-              It is easy to come up with target structures that are stable and easy to build. 
-              By easy we mean the tasks that can be solved by simple pick and place primitives.
-              This is in contrast to tasks that require unique reasoning skills (see our task-suite for more examples), which are not trivial to design and to solve.
-              
-              We can train multi-task RL agents using dense rewards to solve these easy to build tasks. 
-              Will the pretrained model provide a better initialization for solving the novel / unsolvable tasks we really care about?
-              
-              This is akin to pretraining in LLMs where low quality data is cheap, but data for novel / unsolvable tasks in not availble (by definition).
-              </p>
-
-              
-              <p>
-              <b>
-              Two dimensional scaling.
-              </b> 
-              The self-supervised protocol allows one to study scaling in two new dimensions. 
-              Compute allocated to sampling autotelic tasks (exploration in tasks-space) and compute
-              allocated to solving the task via trial and error (exploration in trajectory-space). 
-              How to optimally balance the two?
-              </p>
-
-              <p>
-              <b>
-              What is the scaling behavior of current self-supervised exploration algorithms?
-              </b> 
-              While our results show that self-supervised exploration algorithms are not able to solve complex tasks, we have only made a preliminary evaluation.
-              BuilderBench allows one to study what is the scaling behavior of existing self-supervised algorithms. 
-              We argue that the key bottleneck for scaling self-supervised algorithms is availability of suitable benchmarks.
-              Existing benchmarks rarely allow agents to practice skills ranging from exploration to prediction, from low-level control to high-level reasoning.
-              </p>
-              
-              <p>
-              <b>
-              A new type of scaling law?
-              </b> 
-              Typically, the x-axis in scaling laws corresponds to compute. 
-              BuilderBench allows one to systematically put task hardness in the x-axis (build a pyramid from 1, 2, ..., blocks).
-              Can we reliably predict how RL algorithms scale with task hardness?
-              </p>
-
-              <p>
-              <b>
-              Why is the performance of off-policy RL algorithms (like SAC and CRL) so much worse than PPO?
-              </b> 
-              In our experiments, we found that off-policy algorithms (<b>SAC</b> and <b>CRL</b>) were much worse in 
-              terms of sample efficiency and final performance than <b>PPO</b> and <b>RND</b>, despite making more gradient updates.
-              </p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        Our easy-to-use <a style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'" href="https://github.com/rajghugare19/builderbench">codebase</a> makes it easy to start exploring these questions. Please reach out (<a href="mailto:rg9360@princeton.edu" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">rg9360@princeton.edu</a>) or open a github issue if you have any questions or comments.
-
-        <hr style="background-color: #e0e0e0; height: 1px; border: none; margin: 2rem 1rem;">
-
-        
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-  <h2 class="title">BibTeX</h2>
-  <pre><code>
-  @misc{ghugare2025builderbenchbenchmarkgeneralist,
-      title={BuilderBench -- A benchmark for generalist agents}, 
-      author={Raj Ghugare and Catherine Ji and Kathryn Wantlin and Jin Schofield and Benjamin Eysenbach},
-      year={2025},
-      eprint={2510.06288},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2510.06288}, 
-  }</code></pre>
-  </div>
-</section>
-
-<script>
-function toggleDetails(sectionId) {
-  const details = document.getElementById(sectionId + '-details');
-  const btnText = document.getElementById(sectionId + '-btn-text');
-  
-  if (details.style.display === 'none' || details.style.display === '') {
-    details.style.display = 'block';
-    btnText.textContent = 'Hide detailed solution';
-  } else {
-    details.style.display = 'none';
-    btnText.textContent = 'See detailed solution';
-  }
-}
-</script>
-
-</body>
-</html> 
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>AI Agents that Generate Knowledge Must Learn via Interaction</title>
+		<meta name="description" content="[Short summary of the blog post]" />
+		<link rel="stylesheet" href="blogpost.css" />
+	</head>
+	<body>
+		<nav class="document-outline" aria-label="Document Outline">
+			<div class="outline-title">Outline</div>
+			<ul class="outline-list">
+				<li><a href="#introduction">What is BuilderBench?</a></li>
+				<li><a href="#agent-description">Agent Description</a></li>
+				<li><a href="#failure-modes">Failure Modes</a></li>
+				<li><a href="#key-takeaways">Key Takeaways</a></li>
+				<li><a href="#limitations">Limitations</a></li>
+				<li><a href="#closing-remarks">Closing Remarks</a></li>
+				<li><a href="#acknowledgements">Acknowledgements</a></li>
+				<li><a href="#references">References</a></li>
+				<li><a href="#appendix">Appendix</a></li>
+			</ul>
+		</nav>
+
+		<main>
+			<header>
+				<div class="title-line">
+					<h1>AI Agents that Generate Knowledge Must Learn via Interaction</h1>
+				</div>
+			<p class="meta author-list">
+				<a href="https://rajghugare19.github.io/" target="_blank" rel="noopener">Raj Ghugare</a>,
+				<a href="https://karthikncode.github.io/" target="_blank" rel="noopener">Karthik Narasimhan</a>,
+				<a href="https://ben-eysenbach.github.io/" target="_blank" rel="noopener">Benjamin Eysenbach</a><br />
+				March 2026
+			</p>
+			</header>
+
+			
+			<p>
+				This blog post is based on our work <a href="https://arxiv.org/pdf/2510.06288">BuilderBench</a>, which is a benchmark to accelerate research into training that centers around exploration.
+				The vision for BuilderBench is to enable an open-ended stream of potential interactions, where pre-training could only ever cover a tiny slice of all possible behaviors.
+				In the same way that vision models today can paint pictures that go well beyond what is in their training data (e.g., an astronaut mowing the lawn), 
+				we envision embodied agentic systems that can solve tasks that go well beyond the tasks they have practiced solving before.
+			</p>
+
+			<p>
+				<strong>What is this blog post about:</strong> We use BuilderBench to show that the current crop of AI agents struggle in learning to solve tasks which require exploration and creativity. 
+			</p>
+
+			<p>
+				<strong>Main experiment:</strong> The <a href="#hero-figure">figure</a> below shows the performance of agents based on some of the strongest available language-models (as of March 2026) on hard BuilderBench tasks.<sup id="task-divide-ref"><a href="#task-divide-footnote">[1]</a></sup>
+				This blog post takes a closer look at the failure modes of these AI agents.
+			</p>
+
+			<p>
+				<strong>Key takeaway:</strong> We hypothesize that exploration, both in the space of physical interactions and the space of thoughts is the primary bottleneck.
+			</p>
+
+			<p>
+				<strong>Call for future work:</strong> We have created a <a href="https://rajghugare19.github.io/builderbench/leaderboard.html">public leaderboard</a>. We encourage folks to try out their ideas and submit results to the leaderboard through our <a href="https://github.com/RajGhugare19/builderbench">code</a>.
+			</p>
+
+			<figure class="hero-figure" id="hero-figure">
+				<img src="media/builderbench_perf.png" alt="BuilderBench performance plot" class="hero-plot" />
+				<figcaption class="hero-caption">
+					Agents based on strong language models like GPT 5.2, Claude Opus 5.6, and Gemini 3 Flash fail to solve
+					the hard BuilderBench tasks (see below for more details on the tasks). While agents make some progress (fraction of blocks in place),
+					they usually do not learn the key skills needed to solve tasks. These tasks require the agent to come up with novel hypotheses
+					and try various strategies to gain more information. We find that these abilities are largely absent from the agents we tried.
+				</figcaption>
+			</figure>
+
+			<section id="introduction">
+
+				<h1>What is BuilderBench?</h1>
+
+				<div class="video-gallery" id="trivial-task-videos">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/permute-2.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<video controls autoplay loop muted playsinline>
+						<source src="media/stack-2.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<p class="caption">Claude Opus 4.6 solving some simple BuilderBench tasks (permute two cubes and stack two cubes).</p>
+				</div>
+
+				<p>
+					BuilderBench is a benchmark that requires AI agents to learn to control a robot to physically build a given target structure using building-blocks.
+					BuilderBench is equipped with a simulator and a task-suite. 
+					The task-suite contains over 50 tasks, where each task is a target block structure that is carefully curated for evaluating unique skills. 
+					Tasks are specified by the target center of mass of blocks in the target structure.
+					In order to succeed, the agent has to control the robot to correctly place the blocks. But doing so is not straightforward, it requires conducting various experiments and learning about the architecture and physics of block-building.
+				</p>
+					
+				<p>
+					In particular, tasks require a wide variety of higher-level skills such as logical reasoning (commutativity and associativity of pick and place ordering), geometrical reasoning (maximizing overhangs, packing problems) and intuitive physics (gravity, friction, toppling, balancing). 
+					Tasks also require reasoning about counterweights, buttresses and discovering new tools for performing skills like temporary scaffolding or disassembling.
+					Please check out the <a href="https://arxiv.org/pdf/2510.06288">BuilderBench paper</a> for more details on the benchmark and its philosophy.
+				</p>
+				
+				<p>
+					<strong>Our central hypothesis, which motivates the use of block-building, is that the space of skills and discoveries that an agent has to know to build all possible structures is so vast, that it is impossible to memorize them at design time.</strong>
+					An agent will always have to interact with the environment and make new discoveries to build any given target structure. 
+					In particular, we are inspired by the following quote by Paul Zeitz<sup id="paul-zeitz"><a href="#paul-zeitz-footnote">[3]</a></sup>
+				</p>
+
+				<blockquote>
+					We distinguish between problems and exercises. An exercise is a question that you know how to resolve immediately. Whether you get
+					it right or not depends on how expertly you apply specific techniques, but you don't
+					need to puzzle out what techniques to use. In contrast, a problem demands much
+					thought and resourcefulness before the right approach is found.
+				</blockquote>
+				
+				<p>
+					<strong>We believe the space of block-building tasks contains difficult problems, which not only demand thought and resourcefulness but also demand interaction with the world.</strong>
+					Look at the <a href="#task-slides">visualizations</a> of various target structures in the BuilderBench task suite below.
+				</p>
+
+				<div class="task-slideshow" aria-label="BuilderBench task slideshow">
+					<button class="slide-nav prev" type="button" aria-label="Previous task">&#8249;</button>
+					<div class="task-slides" id="task-slides">
+						<figure class="task-slide"><img src="media/task-slideshow/cube-15-task-1.png" alt="cube-15-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-15-task-2.png" alt="cube-15-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-2-task-1.png" alt="cube-2-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-2-task-3.png" alt="cube-2-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-2-task-4.png" alt="cube-2-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-2-task-5.png" alt="cube-2-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-20-task-1.png" alt="cube-20-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-3-task-1.png" alt="cube-3-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-3-task-2.png" alt="cube-3-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-3-task-3.png" alt="cube-3-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-3-task-4.png" alt="cube-3-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-3-task-5.png" alt="cube-3-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-3-task-6.png" alt="cube-3-task-6" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-4-task-1.png" alt="cube-4-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-4-task-2.png" alt="cube-4-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-4-task-3.png" alt="cube-4-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-2-task-2.png" alt="cube-2-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-4-task-4.png" alt="cube-4-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-4-task-5.png" alt="cube-4-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-4-task-6.png" alt="cube-4-task-6" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-5-task-1.png" alt="cube-5-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-5-task-2.png" alt="cube-5-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-5-task-3.png" alt="cube-5-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-5-task-4.png" alt="cube-5-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-5-task-5.png" alt="cube-5-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-50-task-1.png" alt="cube-50-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-50-task-2.png" alt="cube-50-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-6-task-1.png" alt="cube-6-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-6-task-2.png" alt="cube-6-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-6-task-3.png" alt="cube-6-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-6-task-4.png" alt="cube-6-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-6-task-5.png" alt="cube-6-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-1.png" alt="cube-7-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-2.png" alt="cube-7-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-3.png" alt="cube-7-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-4.png" alt="cube-7-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-5.png" alt="cube-7-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-6.png" alt="cube-7-task-6" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-7-task-7.png" alt="cube-7-task-7" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-8-task-1.png" alt="cube-8-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-8-task-2.png" alt="cube-8-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-8-task-3.png" alt="cube-8-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-8-task-4.png" alt="cube-8-task-4" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-8-task-5.png" alt="cube-8-task-5" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-9-task-1.png" alt="cube-9-task-1" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-9-task-2.png" alt="cube-9-task-2" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-9-task-3.png" alt="cube-9-task-3" /></figure>
+						<figure class="task-slide"><img src="media/task-slideshow/cube-9-task-4.png" alt="cube-9-task-4" /></figure>
+					</div>
+					<button class="slide-nav next" type="button" aria-label="Next task">&#8250;</button>
+				</div>
+				<p class="task-slideshow-hint">Scroll horizontally or use the arrows to browse target structures from the BuilderBench task-suite.<sup id="impossible-task"><a href="#impossible-task-footnote">[4]</a></sup></p>
+
+			</section>
+
+			<section id="agent-description">
+			<h1>Agent Description</h1>
+
+			<p>
+				In this blog post, we will take a closer look at the results of a reflexion agent<sup id="reflexion-ref"><a href="#reflexion-footnote">[5]</a></sup> based on Claude Opus 4.6 (with high adaptive thinking).
+				This agent interacts with the environment for multiple episodes and maintains a running summary of its learnings.
+				The summaries include details of the agent's past mistakes, learnings and best plans of action. This agent can interact with the environment for multiple episodes (three in our experiments) and use its past reflections to continually improve its decision-making.
+				In the paper<sup id="builderbench-arxiv-ref"><a href="#builderbench-arxiv-footnote">[2]</a></sup> we have included detailed results of other models like GPT 5.2 and Gemini 3 Flash (both with high reasoning). 
+            </p>
+
+			<p>
+				Please refer to the <a href="#experimental-setup">appendix</a>, <a href="https://arxiv.org/pdf/2510.06288">paper</a>, and the <a href="https://github.com/RajGhugare19/builderbench">code</a> for more details about all the agents, models and the agent-environment interface. 
+			</p>
+
+			<p>
+				In the <a href="#failure-modes">next section</a>, we will look at four different tasks and try to understand the failure modes of the reflexion agent.
+				We then highlight the <a href="#key-takeaways">key takeaways</a> from our analysis, <a href="#limitations">limitations</a> of our work and <a href="#closing-remarks">concluding thoughts</a>.
+			</p>
+
+			</section>
+
+			<section id="failure-modes">
+			
+			<h1>Failure Mode - T Block</h1>
+
+			<div class="reflexion-row">
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-3-task-2/episode-00.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 26,573<br>Tokens out: 9,736</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-3-task-2/episode-01.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 50,831<br>Tokens out: 15,368</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-3-task-2/episode-02.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 281,916<br>Tokens out: 40,390</figcaption>
+				</figure>
+			</div>
+			<p class="reflexion-caption">Reflexion: Claude Opus 4.6</p>
+
+			<figure class="case-figure case-card case-card-float">
+				<img src="media/tasks/cube-3-task-2.png" alt="t-block target structure" class="case-image" />
+				<figcaption class="case-caption"><b>Correct Solution:</b> T-block.</figcaption>
+			</figure>
+
+			<p>
+				As visualized in the figure, the goal of this agent is to stack
+				three blocks in T shaped block in a stable manner. 
+				The agent in this case tries to naively stack blocks, but does not realize that the naive configuration is never going to be stable.
+				This is a particularly compelling example of a task where playful interaction might stumble on the true solution. 
+				The red block can be rotated by 45&deg to increase the surface area of supporting both blocks simultaneously.
+			</p>
+
+			<p>
+				The summary of the agent <a href="#t-block-summary">below</a> shows that it correctly formalizes the problem (instability of stacking) but formalizes a flawed hypothesis of mutual stability upon placing two cubes together (see key insight from the summary). 
+				<strong>Despite using a high amount of thinking (see input and output tokens), the agent does not spend its budget on coming up with novel hypotheses or does not focus on playful information gathering.</strong>
+				The agent seems to assume that it knows how to solve the task and is always trying to be greedy with respect to its current knowledge.
+			</p>
+			
+			<details class="agent-summary" id="t-block-summary">
+			<summary>Click here to expand the summary</summary>
+			<div class="summary-content">
+
+				<h2>Agent's summary before third episode</h2>
+				<p>Cube 0: Successfully placed at target [0.450, 0.000, 0.020] ✓</p>
+				<p>Cube 1 stacking failed: Attempted pick_and_place to [0.450, 0.020, 0.062]. Cube slid off Cube 0 to [0.452, 0.041, 0.020] (ground level). The 50% overlap (y offset = 0.020 on a 0.04m cube) is inherently marginal — the gripper release/retreat likely nudged it off.</p>
+				<p>Cube 2: Still at starting position [0.300, 0.080, 0.020], untouched.</p>
+				<p>Time remaining: ~12.3 seconds — enough for 2 more pick_and_place + 1 pick_and_hold.</p>
+				<p>Key Insight: Both Cube 1 (y=+0.020) and Cube 2 (y=-0.020) have symmetric 50% overlap on Cube 0. If BOTH are placed, they contact each other at y=0, potentially creating mutual stability. The problem is getting the first one to stay long enough for the second to be placed.</p>
+				<h2>Plan for Remaining Steps</h2>
+				<ol>
+					<li>Re-attempt Cube 1 pick_and_place to [0.450, 0.020, 0.060] with yaw=0. Try z=0.060 (not 0.062) for tighter fit.</li>
+					<li>If Cube 1 stays: pick_and_hold Cube 2 at [0.450, -0.020, 0.060] through episode end.</li>
+					<li>If Cube 1 falls again: Try placing Cube 2 first via pick_and_place, then pick_and_hold Cube 1 — holding the last-placed cube eliminates the instability problem for at least one.</li>
+					<li>Grasp_yaw consideration: Try grasp_yaw=1 if grasp_yaw=0 caused directional push during release.</li>
+				</ol>
+			</div>
+			</details>
+			
+			<h1>Failure Mode - Packing Four Cubes</h1>
+			
+			<div class="reflexion-row">
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-4-task-3/episode-00.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 50,768<br>Tokens out: 28,820</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-4-task-3/episode-01.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 44,803<br>Tokens out: 25,859</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-4-task-3/episode-02.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 25,562<br>Tokens out: 5,675</figcaption>
+				</figure>
+			</div>
+			<p class="reflexion-caption">Reflexion: Claude Opus 4.6</p>
+			
+			<figure class="case-figure case-card case-card-float">
+				<img src="media/tasks/cube-4-task-3.png" alt="Four cube packing target structure" class="case-image" />
+				<figcaption class="case-caption"><b>Correct Solution:</b> Packing four cubes in a rotated square.</figcaption>
+			</figure>
+			
+			<p>
+				As shown in the figure, the goal of this task is to place four cubes in a rotated square. 
+				The videos show Claude Opus 4.6 attempting to build this structure.
+
+				In its first attempt, the agent tries to place blocks naively and realizes that the gripper can hit nearby blocks while placement. 
+
+				In the second episode, the agent corrects for this by placing the yellow and the green blocks first and then rotating its picking orientation before trying to place the red and the green blocks. 
+				But it still tries to place blocks on top of already existing blocks, not learning from its previous failures. 
+			</p>
+			<div class="case-clear"></div>
+
+			<p>
+				<strong>The main failure mode in this case is the inability to use goal oriented planning. </strong>
+				The agent has all the information (width of the cubes, position and orientation of the cubes) to guess whether a particular placement will lead to an overlap or not. Still, on numerous occasions the agent tries to place blocks in a place that is already obstructed by other cubes.
+				<strong>This suggests that the agent either does not have a good world model of intuitive physics, or does not have the ability to use its model for goal oriented planning.</strong>
+			</p>
+
+			<p>
+				<a href="#four-packing-summary">Below</a> we provide the summary made by the reflexion agent at the end of the second episode. It misses the main problem with the naive placement and makes an ungrounded assumption that the pick and place subroutine is inaccurate when picking from a particular orientation (see point 1).
+				While it is okay for interactive agents to make wrong assumptions or hypotheses, a goal oriented agent should quickly try to verify whether those hypotheses are correct. 
+				As can be seen in the third video, the agent however shows no affinity towards verifying this hypothesis.
+			</p>
+
+			<details class="agent-summary" id="four-packing-summary">
+			<summary>Click here to expand the summary</summary>
+			<div class="summary-content">
+				<h2>Agent's summary before third episode</h2>
+				<p>Key Lessons (for Trial 3):</p>
+				<ol>
+					<li>grasp_yaw=1 is inaccurate — consistent ~0.02m errors, especially in y-axis. Avoid if possible.</li>
+					<li>Tight diamond pattern causes chain collisions — each pick_and_place disturbs already-placed neighbors. The cubes are only 0.04m apart (touching).</li>
+					<li>Order matters critically — must place inner/difficult cubes LAST to avoid disruption, OR use a strategy that accounts for nudging.</li>
+					<li>Cube 3 was hardest to place — kept getting knocked around by subsequent operations.</li>
+				</ol>
+			</div>
+			</details>
+
+			<h1>Failure Mode - Two Cubes in Mid-Air</h1>
+
+			<div class="reflexion-row">
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-2-task-5/episode-00.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 83,363<br>Tokens out: 62,577</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-2-task-5/episode-01.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 71,104<br>Tokens out: 53,271</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-2-task-5/episode-02.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 25,562<br>Tokens out: 5,675</figcaption>
+				</figure>
+			</div>
+			<p class="reflexion-caption">Reflexion: Claude Opus 4.6</p>
+			
+			<figure class="case-figure case-card case-card-float">
+				<img src="media/tasks/cube-2-task-5.png" alt="dual-airstack target structure" class="case-image" />
+				<figcaption class="case-caption"><b>Correct Solution:</b> Stacking two cubes in mid-air.</figcaption>
+			</figure>
+
+			<p>
+				As visualized in the figure, the goal of this task is to stack
+				two blocks in mid-air in a stable manner. 
+				This task seems impossible at first look, but clearly, one could hold both cubes at once to succeed.
+				The videos show Claude Opus 4.6 attempting to build this structure.
+				In the first two episodes, the agent places the block in the same XY location as the target, but does not attempt or think of holding them at once.
+				In the last episode, it changes strategy and uses the red cube as a base to place the blue cube in its target.
+			</p>
+
+			<p>		
+				The summary <a href="#mid-air-summary">below</a> shows the agent's summary at the end of the first episode. 
+				Its main plan for the second episode is to test for an invisible base, that might support both cubes in air.
+				But the first episode trajectory (see video of episode 1) clearly disproves this hypothesis as cubes are placed on the ground level.
+				<strong>Hence, the main failure mode in this case is to come up with an inconsistent hypothesis.</strong> A human on the other hand will quickly discard inconsistent hypotheses
+				and spend time thinking about novel solutions. In this case, the solution is actually simple and something that might come naturally to humans &mdash; just stack blocks in the correct
+				XY location and pick and hold them together at the correct target.
+			</p>
+			<p>
+				The agent in the second episode realizes that the invisible base hypothesis is wrong and ends up sticking to a strategy which it knows (based on its summary) will not succeed.
+			</p>
+
+			<details class="agent-summary" id="mid-air-summary">
+			<summary>Click here to expand the summary</summary>
+			<div class="summary-content">
+				<h2>Agent's summary before second episode</h2>
+				<p>Key Learnings:</p>
+				<ol>
+					<li>Cube center is ~1mm below EEF position when gripped.</li>
+					<li>pick_and_hold seemed to cap around z≈0.090 for EEF when targeting z=0.100 — maybe need to target z=0.110-0.120 to get cube to z=0.100.</li>
+					<li>Without a base cube at ground level, can't achieve both z=0.060 and z=0.100 targets with only 2 cubes using pure stacking.</li>
+					<li>The task structure (z=0.020, 0.060, 0.100 spacing = 0.04m each) strongly suggests an invisible base exists at [0.450, 0.000, 0.020].</li>
+				</ol>
+				<p>Plan for Trial 2:</p>
+				<ol>
+					<li>Test invisible base: pick_and_place Cube 1 to [0.450, 0.000, 0.060]. If it stays at z≈0.060, invisible base confirmed.</li>
+					<li>If base exists: pick_and_place Cube 0 to [0.450, 0.000, 0.100] → 2/2 success.</li>
+					<li>If no base (Cube 1 falls to z=0.020): Place Cube 0 at [0.450, 0.000, 0.020], then Cube 1 at [0.450, 0.000, 0.060] → 1/2 success (Cube 1). Then attempt pick_and_hold Cube 0 targeting z=0.115 (overshoot) to get cube closer to z=0.100.</li>
+					<li>If pick_and_hold still needed: Target EEF at z=0.110+ since cube sits ~1mm below EEF.</li>
+				</ol>
+			</div>
+			</details>
+
+			<h1>Failure Mode - Leaning Staircase</h1>
+
+			<div class="reflexion-row">
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-9-task-4/episode-00.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 125,634<br>Tokens out: 31,856</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-9-task-4/episode-01.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 123,225<br>Tokens out: 65,585</figcaption>
+				</figure>
+				<figure class="reflexion-item">
+					<video controls autoplay loop muted playsinline>
+						<source src="media/reflexion/cube-9-task-4/episode-02.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Tokens in: 136,569<br>Tokens out: 51,490</figcaption>
+				</figure>
+			</div>
+			<p class="reflexion-caption">Reflexion: Claude Opus 4.6</p>
+
+			<figure class="case-figure case-card case-card-float">
+				<img src="media/tasks/cube-9-task-4.png" alt="staircase target structure" class="case-image" />
+				<figcaption class="case-caption"><b>Correct Solution:</b> Leaning staircase.</figcaption>
+			</figure>
+
+			<p>
+				As visualized in the figure, the goal of this agent is to build a 
+				staircase structure that is leaning towards the right. 
+				This is a task which requires an understanding of counterweights and also requires the agent 
+				to come up or use the idea of scaffolding. 
+				The agent, despite failing to balance the cubes in the first episode, 
+				does not realize that naively placing the cubes will result in an unstable structure. 
+				<strong>It fails to realize the need for and come up with new hypotheses or ways to build the structure.</strong> 
+			</p>
+
+			<p>
+				 <a href="#staircase-summary">Below</a>, we show the summary of the reflexion agent at the end of first episode. 
+				 The summary is noisy, it contains various points which are much less important than others.
+				 For instance, in the "Key learnings from this trial" section, points 2, 3 and 4 are much less important than 1 and 5.
+				Qualitatively, the summary seems mechanical and misaligned with the actual goal of building the target structure. 
+				Instead of optimizing for task success, the agent appears to be prioritizing the generation of a "performative" summary &mdash; one designed to seem comprehensive to a human reader rather than being functionally useful for subsequent trials.
+			</p>
+
+			<details class="agent-summary" id="staircase-summary">
+			<summary>Click here to expand the summary</summary>
+			<div class="summary-content">
+				<h2>Agent's summary towards the end of the first episode</h2>
+				<p>Key learnings from this trial:</p>
+				<ol>
+					<li>Pure JSON only — any text before JSON causes action rejection, wasting time.</li>
+					<li>Tower collapsed because grasp_yaw=0 approach path collided with existing structure when placing Cube 4 at z=0.10.</li>
+					<li>Use grasp_yaw=1 for upper-level placements near the tower to minimize collision risk.</li>
+					<li>Cube 0 required two attempts — first placement was inaccurate (landed at y=0.028 instead of y=0.000), wasting ~2.8s.</li>
+					<li>Marginal overlaps (Cube 2 on edge of Cube 0, Cube 4 on edge of Cube 2) are risky — only 0.02m overlap (half-cube width).</li>
+				</ol>
+				<p>Plan for remaining time (build bottom-up):</p>
+				<ol>
+					<li>Cube 3 → (0.450, -0.020, 0.060), yaw=0, grasp_yaw=0 — stable bridge on Cubes 0+1</li>
+					<li>Cube 2 → (0.450, 0.020, 0.060), yaw=0, grasp_yaw=0 — marginal on Cube 0</li>
+					<li>Cube 5 → (0.450, 0.000, 0.100), yaw=0, grasp_yaw=1 — bridge on 2+3</li>
+					<li>Cube 4 → (0.450, 0.040, 0.100), yaw=0, grasp_yaw=1 — marginal on Cube 2</li>
+				</ol>
+				<p>Trial 2 strategy if needed:</p>
+				<ul>
+					<li>Place all ground cubes first (0, 1, 7, 8) efficiently in ~11s</li>
+					<li>Build layers 2-4 using grasp_yaw=1 for collision avoidance: 3, 2, 5, 4, 6</li>
+					<li>Total ~9 placements × 2.8s = ~25s, well within 54s budget</li>
+					<li>Avoid text in output, be precise on first attempts</li>
+				</ul>
+			</div>
+			</details>
+
+			</section>
+
+		<section id="key-takeaways">
+				<h1>Key Takeaways</h1>
+			<p>
+            A common theme in the failure cases is that agents always take a greedy action, i.e, the action they think will 
+			immediately solve the task. In fact, in most of the hard tasks, 
+			the agent does not show any signs of exploration or hypothesis testing to gain more
+			information about the task. While the environment follows standard physics and an LLM has probably already compressed Newtonian physics,
+			its behavior is still unlike humans with an understanding of physics (for e.g., Ben and Karthik). Humans play around and show an affinity towards 
+			learning by doing.
+			</p>
+
+			<p>
+			An underlying issue is also the failure to explore in the space of thoughts / plans. Despite using a large budget of thinking tokens,
+			LLMs spend it on coming up with greedy actions. They do not show proclivity towards playful interactions or out of the box experimentation. 
+			But these are exactly the type of interactions that lead to new discoveries or solutions to novel problems.
+			</p>	
+
+			Other prominent failure modes were
+			<ol>
+				<li> Planning: Many times the agent tries strategies which are clearly going to fail (trying to place a block where there already is one). 
+			Such failure modes should be avoidable if agents have a decent world model of physics and use it to simulate plans.
+				<li> Fine-grained control: Agents mostly rely on high-level primitives and rarely use skills such as nudging (although there are some exceptions). This was the most expected failure mode as these models are not trained to explicitly output low level controls.
+			</ol>	
+
+		</section>
+
+		<section id="limitations">
+				<h1>Limitations of current analysis</h1>
+			<p>
+				Despite our hypothesis about building blocks being an open-ended setup, the number of tasks in our
+				benchmark is finite. This is because coming up with new non-trivial tasks is non-trivial.
+				The scope of designing tasks could be drastically improved by adding blocks of new shapes or objects with different properties (for e.g., magnets). 
+				One interesting direction for future work would be to set up an adversarial game between a task designer and a task solver
+			</p>
+
+			<p>
+				One could argue that the problem of building things is visual in nature, and LLMs struggle because they 
+				are unable map textual coordinates to a physics-based representation. While this is a partly fair critic, there
+				are many easy tasks with a large number of cubes (upto nine in our experiments) that these LLMs are able to solve, suggesting that they are able to understand the physics of block-building to a certain extent.
+				Additionally, our benchmark does provide a way to query images of the scene, and we encourage future approaches which takes this visual information into account.
+			</p>
+
+			<p>
+				While we use the strongest available language models (at the time of writing) for our evaluation, the agents we evaluate are a tiny subset of all potential approaches. 
+				Exploring agents based on vision, control (vision language action models), recursive self improvement or RL fine tuning, including agents with better robotic systems or harnesses remain an interesting direction for future work.
+			</p>
+		</section>
+
+		<section id="closing-remarks">
+				<h1>Closing Remarks</h1>
+			<p>
+				Our central hypothesis, which motivated the use of block-building is that the space of skills and discoveries that an agent has to know to build all possible structures is so vast, that it is impossible to memorize them at design time.
+				In the coming months or years, solutions which attempt to use such memorization might saturate the BuilderBench leaderboard. <strong>We are confident that
+				we (or someone else) would be able to come up with new block-building tasks that such an approach will fail to learn to build.</strong>
+			</p>
+			<p>
+				On the other hand, one can also imagine a generalizable solution that learns to build or makes meaningful progress 
+				in building any given structure of blocks during its runtime. The goal of BuilderBench is to drive research progress 
+				towards such algorithms. 
+			</p>
+
+			<p class="closing-note">
+				Please reach out to Raj via <a href="mailto:rg9360@princeton.edu">email</a> / <a href="https://x.com/GhugareRaj">X</a> if you have any questions or feedback. Please check our <a href="https://arxiv.org/abs/2510.06288">paper</a> and <a href="https://github.com/rajghugare19/builderbench">code</a> for more details and try out your exciting ideas!
+				We particularly encourage folks to <a href="https://github.com/RajGhugare19/builderbench/submit.py">submit</a> results to the public leaderboard.
+			</p>
+		</section>
+
+		<section id="acknowledgements">
+				<h1>Acknowledgements</h1>
+			<p>
+				This blog post is based on our work <a href="https://arxiv.org/pdf/2510.06288">BuilderBench</a> and could not have been 
+				possible without our other co-authors Roger Creus Castanyer, Catherine Ji, Kathryn Wantlin and Jin Schofield. 
+				We would like to thank Mahsa Bastankhah, Michał Bortkiewicz and Siddarth Venkatraman for their detailed and helpful feedback.  
+				We thank Catherine Ji, Kathryn Wantlin and Jin Schofield for helpful suggestions about presentation of ideas and the frontend design of this blogpost.
+			</p>
+		</section>
+
+		<section id="references">
+			<h1>References</h1>
+			<footer>
+				<ol class="footnotes">
+					<li id="task-divide-footnote">
+						The task suite contains tasks ranging from very easy to extremely hard. We divided the tasks into
+						two categories (easy and hard) based on whether they are programmatically straightforward to solve.
+						We evaluate all agents on all the easy (23/50) and hard tasks (27/50). The results on the easy tasks can be found
+						in our paper.
+					</li>
+
+					<li id="builderbench-arxiv-footnote">
+						BuilderBench: A Benchmark for Building-Block Building with Robots — 
+						<a href="https://arxiv.org/pdf/2510.06288">https://arxiv.org/pdf/2510.06288</a>
+					</li>
+
+					<li id="paul-zeitz-footnote">
+						Taken from Paul Zeitz's wonderful book, "Art and Craft of Problem Solving".
+					</li>
+
+					<li id="impossible-task-footnote">
+						Some of the target structures have block targets floating in air, these tasks require the agent to somehow use its gripper to support those blocks.
+					</li>
+
+					<li id="reflexion-footnote">
+						Reflexion: Language Agents with Verbal Reinforcement Learning — 
+						<a href="https://arxiv.org/abs/2303.11366">https://arxiv.org/abs/2303.11366</a>
+					</li>
+
+					<li id="footnote-3">
+						At the time of writing
+					</li>
+				</ol>
+			</footer>
+		</section>
+
+			<section id="appendix">
+				<h1>Appendix</h1>
+				<h2 id="system-prompt-appendix">Environment System Prompt</h2>
+				<figure class="prompt-figure">
+					<div class="prompt-box">
+						<pre><code>Environment System Prompt
+
+You are an agent who must control a UR5e robot arm with a Robotiq 2F-85 parallel jaw gripper in a simulated environment with cube-shaped blocks.
+
+Environment Overview
+1. Simulation is implemented using MuJoCo and approximates Newtonian physics.
+2. All positions are in meters; all rotations are in radians. All coordinates are in the global frame, with z=0 as the ground surface.
+3. Each cube has an edge length of 0.04 meters.
+4. The gripper's maximum opening is 0.085 meters.
+5. The environment provides these observations:
+	- Current timestep and the total number of timesteps in the episode.
+	- End-effector position and yaw.
+	- Potential target position for the end-effector.
+	- Positions and yaws of all cubes.
+	- Target locations for some cubes.
+	- Success condition for cubes with targets.
+6. You have to output an action (conforming to the defined Action Schema below) at each step with the goal of achieving the success condition for ALL cubes that have an assigned target. Success condition: all cubes are at their respective targets and remain there stably. Move the end effector at its target position (if specified) upon task completion.
+
+Action Schema
+
+Action Types
+1. "pick_and_place": Executes a Pick -> Lift -> Place -> Retreat plan using low-level controls (no collision avoidance).
+	- "cube_id": int — ID of the object to grasp
+	- "grasp_yaw": int — 0 or 1 (perpendicular axes for grasping a cube)
+	- "pos": [x, y, z] — Target position to place the cube
+	- "yaw": float — Cube placement rotation (radians)
+	- Note: After placing, the arm retreats to [0.3, 0.0, 0.25].
+
+2. "pick_and_hold": Executes a Pick -> Lift -> Hold plan (no collision avoidance).
+	- "cube_id": int — ID of the object to grasp
+	- "grasp_yaw": int — 0 or 1
+	- "pos": [x, y, z] — Target hold position
+	- "yaw": float — Target hold rotation (radians)
+	- Note: The arm holds the cube in the specified pose.
+
+3. "eef_target": Uses a PD controller to move the end-effector to a specified target position and yaw (no collision avoidance).
+	- "pos": [x, y, z] — Target end-effector position (meters)
+	- "yaw": float — Target end-effector yaw (radians)
+	- "gripper": float — 0.0 (open) to 1.0 (closed)
+
+4. "low_level": Applies delta end-effector control for a few timesteps (fine-grained control; plan sequences to achieve high-level tasks).
+	- "action": [delta_x, delta_y, delta_z, delta_yaw, delta_gripper_strength]
+
+Output Format
+Always output actions as a single, valid JSON object with the specified key/value structure.
+
+Examples
+- Pick and Place:
+  {"type": "pick_and_place", "cube_id": 0, "grasp_yaw": 0, "pos": [0.5, -0.2, 0.02], "yaw": 1.57}
+
+- Pick and Hold:
+  {"type": "pick_and_hold", "cube_id": 0, "grasp_yaw": 0, "pos": [0.5, -0.2, 0.2], "yaw": 0.0}
+
+- End-Effector Target:
+  {"type": "eef_target", "pos": [0.45, 0.1, 0.3], "yaw": 1.57, "gripper": 1.0}
+
+- Low Level:
+  {"type": "low_level", "action": [0.3, 0.0, 0.1, 0.0, 1.0]}</code></pre>
+					</div>
+					<figcaption class="prompt-caption">Environment system prompt provided to language model agents.</figcaption>
+				</figure>
+				<hr class="appendix-separator" />
+				<h2 id="observation-appendix">Example Language Observation</h2>
+				<figure class="prompt-figure">
+					<div class="prompt-box">
+						<pre><code>Example Language Observation
+							
+Time: 2.88 / 18.00
+
+End Effector State
+- End Effector: pos=[0.323, 0.004, 0.228], yaw=-0.032, target=[0.300, 0.000, 0.250]
+- Gripper: 0.000
+
+Cube State
+- Cube 0: pos=[0.452, -0.001, 0.020], yaw=0.009, target=[0.450, 0.000, 0.020], success=True
+- Cube 1: pos=[0.300, 0.000, 0.020], yaw=0.000, target=[0.450, 0.000, 0.060], success=False
+- Cube 2: pos=[0.300, 0.080, 0.020], yaw=0.000, target=[0.450, 0.000, 0.100], success=False</code></pre>
+					</div>
+					<figcaption class="prompt-caption">Example language observation provided by the language interface of BuilderBench for a cube stacking task. The observation contains the current episode time, the total episode time, the state of the end effector, and the state and success conditions for each cube.</figcaption>
+				</figure>
+				<hr class="appendix-separator" />
+				<h2 id="action-appendix">Example Language Action</h2>
+				<figure class="prompt-figure">
+					<div class="prompt-box">
+						<pre><code>Example Language Action
+
+{"type": "pick_and_place", "cube_id": 1, "grasp_yaw": 0, "pos": [0.45, 0.0, 0.06], "yaw": 0.0}</code></pre>
+					</div>
+					<figcaption class="prompt-caption">Example of an action output by an LLM agent in the desired JSON format. The agent commands the environment to pick cube 1 and place it in a particular pose.</figcaption>
+				</figure>
+				<hr class="appendix-separator" />
+			</section>
+
+			<section id="experimental-setup">
+				<h1>Language interface for evaluating LLMs</h1>
+		
+				<p>
+					We provide a language interface to evaluate large language models based agents on BuilderBench.
+				</p>
+
+				<p>	
+					<b>System Prompt</b>.  
+					At the start, the agent is provided with an environment system prompt which describes the environment dynamics, semantics of observations and actions, and the expected action schema.
+					See <a href="#system-prompt-appendix">appendix</a> for the exact system prompt.
+				</p>
+
+				<p>
+					<b>Observations and task specification</b>. At each timestep of the episode, the interface provides a language description of the scene in a neat tabular format. This description contains the current time, total time and the position and orientation of the end effector. It also contains cube-wise positions, orientations, targets and success conditions.
+					The cube-wise targets are the center of mass of each cube in the target structure. The success conditions let the agent know whether a particular cube is at its target or not.
+					The goal of the agent is to build a structure such that cubes remain stably at their respective target location.
+					See <a href="#observation-appendix">appendix</a> for an example observation.
+				</p>
+				
+				<p>
+					<b>Actions</b>. The agent can control the robot using low level controls or by commanding a high level planner. The planner can be used to move the end effector any pose, pick a cube in different orientations and place or hold a cube in different poses.
+					See <a href="#action-appendix">appendix</a> for an example action.
+				</p>
+
+				<p>
+					Look at the <a href="#trivial-task-videos">videos</a> of Claude Opus 4.6 solving some 
+					simple tasks using this interface.
+				</p>
+				<hr class="appendix-separator" />
+			</section>
+		</main>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const outlineLinks = document.querySelectorAll('.outline-list a');
+				const sections = document.querySelectorAll('section, header');
+
+				window.addEventListener('scroll', () => {
+					let currentSectionId = '';
+
+					// Find which section is currently near the top of the viewport
+					sections.forEach(section => {
+						const sectionTop = section.offsetTop;
+						// The '150' offset ensures the highlight triggers slightly before the section hits the very top of the screen
+						if (scrollY >= sectionTop - 150) {
+							currentSectionId = section.getAttribute('id');
+						}
+					});
+
+					// Remove 'active' from all links, then add it to the correct one
+					outlineLinks.forEach(link => {
+						link.classList.remove('active');
+						if (link.getAttribute('href') === `#${currentSectionId}`) {
+							link.classList.add('active');
+						}
+					});
+				});
+			});
+
+			const slideshow = document.querySelector(".task-slideshow");
+			if (slideshow) {
+				const track = slideshow.querySelector(".task-slides");
+				const slides = Array.from(track.querySelectorAll(".task-slide"));
+				const prevButton = slideshow.querySelector(".slide-nav.prev");
+				const nextButton = slideshow.querySelector(".slide-nav.next");
+
+				let currentIndex = 0;
+				const scrollToIndex = (nextIndex) => {
+					if (!slides.length) return;
+					currentIndex = (nextIndex + slides.length) % slides.length;
+					slides[currentIndex].scrollIntoView({
+						behavior: "smooth",
+						inline: "center",
+						block: "nearest",
+					});
+				};
+
+				prevButton.addEventListener("click", () => scrollToIndex(currentIndex - 1));
+				nextButton.addEventListener("click", () => scrollToIndex(currentIndex + 1));
+			}
+		</script>
+	</body>
+</html>
