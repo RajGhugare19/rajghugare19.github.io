@@ -45,7 +45,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">On the Role of Iterative Computation in RL</h1>
+          <h1 class="title is-1 publication-title">On the Role of Computation in RL</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://rajghugare19.github.io/" style="color: #598BE7; text-decoration: none;" onmouseover="this.style.color='#FFA500'" onmouseout="this.style.color='#598BE7'">Raj Ghugare<sup>1</sup></a>
@@ -103,8 +103,16 @@
 
 <section class="section" style="margin-top: -4rem;">
   <div class="container is-max-desktop">
+
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <video autoplay muted loop playsinline style="width: 70%; border-radius: 4px;">
+        <source src="static/video/ValueOfCompute.mp4" type="video/mp4">
+      </video>
+      <p style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 0.9em; color: #666; margin-top: 0.5rem;">Our paper provides a numerical way to measure how much value is gained/lost by using more or less compute while taking an action.</p>
+    </div>
+
     <div class="columns is-centered">
-      
+
       <div class="column is-four-fifths">
         <h2 class="title is-3">Motivation</h2>
         <div class="content">
@@ -113,14 +121,8 @@
               
               <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
               <p>
-                The standard view in reinforcement learning (RL) is to treat RL policies as static functions that map states to actions. 
-                Policies typically spend a fixed amount of compute, regardless of the complexity of making the correct decision in the underlying state. 
-                For example, for a humanoid robot, the action of where to move the right foot is easy, but figuring out how to efficiently pack furniture in a truck requires more deliberation. 
-
-                In RL, this limitation is often solved by citing Moore's law and simply scaling the number of policy parameters. 
-                But the compute required to make good decisions in different situations can span many orders of magnitude; using a static massive policy with a large number of parameters is wasteful. 
-                Additionally, as compute becomes cheap, the complexity of the world and sensory data also increase, making it infeasible to simply scale up policy parameters.
-
+                In RL, when people talk about compute, they typically mean the compute needed to train a policy / value function or the compute spent on planning algorithms.
+                But RL policies as treated as static functions that map states to actions, regardless of the computational difficulty of taking good actions.
               </p>
               <p>
                 The main contributions of our work are:
@@ -147,7 +149,12 @@
             <div class="column">
               <div class="content has-text-justified" style="margin-bottom: 1rem; margin-top: -0.5rem;">
 
-              <img src="static/images/rec-block.png" alt="rec-architecture" style="width: 30%; border-radius: 4px; margin: 1rem auto 2rem auto; display: block;">
+              <div style="display: flex; gap: 2rem; align-items: center; justify-content: center; margin: 1rem -3rem 2rem -3rem;">
+                <img src="static/images/rec-block.png" alt="rec-architecture" style="height: 320px; width: auto; border-radius: 4px; flex-shrink: 0;">
+                <video autoplay muted loop playsinline style="height: 320px; width: auto; border-radius: 4px; flex-shrink: 0;">
+                  <source src="static/video/IRUPolicySimple.mp4" type="video/mp4">
+                </video>
+              </div>
 
               <p>
               In our experiments, we will use the above architecture for policy and value networks. 
@@ -291,8 +298,8 @@
   <div class="container is-max-desktop content">
   <h2 class="title">BibTeX</h2>
   <pre><code>
-  @misc{ghugare2026computationreinforcementlearning,
-      title={On Computation and Reinforcement Learning}, 
+@misc{ghugare2026roleiterativecomputationreinforcement,
+      title={On the Role of Iterative Computation in Reinforcement Learning}, 
       author={Raj Ghugare and Michał Bortkiewicz and Alicja Ziarko and Benjamin Eysenbach},
       year={2026},
       eprint={2602.05999},
